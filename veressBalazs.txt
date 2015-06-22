@@ -1,6 +1,6 @@
+
+ize mar
 proba
-<<<<<<< HEAD
-atirtam beeee
-=======
-proba
->>>>>>> 6e19e26306cb89ec3fc6d86819e6ac708f716c6f
+
+
+alma
