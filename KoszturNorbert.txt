@@ -1,7 +1,5 @@
 Ez egy új próbafájl.
-<<<<<<< HEAD
 Ez a saját újabb sorom.
 =======
 Dicsák buksi!
-
 na nézzük
