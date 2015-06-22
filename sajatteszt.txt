@@ -4,4 +4,5 @@ asfa
 fa
 teszt
 a
+BALINTa
 irjál ide egy sort

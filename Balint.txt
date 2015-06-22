@@ -1,2 +1,6 @@
 Balint Szabo asd
+<<<<<<< HEAD
 nemnemnem
+=======
+MODOSITAS
+>>>>>>> 5fdbb1ff1add0fb84eaca80ed50c823edfe3c717
