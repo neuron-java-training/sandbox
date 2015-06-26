@@ -1,7 +1,0 @@
-<<<<<<< HEAD
-
-
-git conflict
-=======
-valami
->>>>>>> 31f0df7dd27d788bf973d77ddec1ef96f12a91b2
