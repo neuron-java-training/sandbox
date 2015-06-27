@@ -2,11 +2,12 @@ package kollekcioteszter;
 
 public interface Test {
 	
-	public 	void creationTest();
-	public 	void fillTest();
-	public 	void sortTest();
-	public 	void accessTest(int elementNumber);
-	public 	void deletionTest(int first, int last);
-	public  void removeDuplicates();
+	public long creationTest();
+	public long fillTest();
+	public long sortTest();
+	public long accessTest(int elementNumber);
+	public long deletionTest(int first, int last);
+	public long removeDuplicates();
+	public String getCollectionName();
 
 }

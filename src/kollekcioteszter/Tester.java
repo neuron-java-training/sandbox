@@ -2,7 +2,7 @@ package kollekcioteszter;
 
 public abstract class Tester {
 
-	protected final int NUMBER = 500_000;
+	protected final int NUMBER = 10000;
 	protected final TestObject[] testData;
 	
 	public Tester(){
@@ -17,8 +17,7 @@ public abstract class Tester {
 		
 		for(int i = (tenth * 9); i <NUMBER; i++){
 			testData[i]= new TestObject(testData[i - (tenth * 9)]);
-		}
-		
+		}	
 	}
-	
+
 }
