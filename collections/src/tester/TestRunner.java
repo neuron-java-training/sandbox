@@ -1,6 +1,7 @@
-package kollekcioteszter;
+package tester;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import dequeue.ArrayDequeTester;
 import queue.PriorityQueueTester;
@@ -9,6 +10,9 @@ import sets.LinkedHashSetTester;
 import sets.TreeSetTester;
 import lists.ArrayListTester;
 import lists.LinkedListTester;
+import map.HashMapTester;
+import map.LinkedHashMapTester;
+import map.TreeMapTester;
 
 public class TestRunner {
 
@@ -22,12 +26,16 @@ public class TestRunner {
 	public void runTests() {
 
 		tests.add(new ArrayListTester());
+		
 		tests.add(new LinkedListTester());
 		tests.add(new HashSetTester());
 		tests.add(new TreeSetTester());
 		tests.add(new LinkedHashSetTester());
 		tests.add(new PriorityQueueTester());
 		tests.add(new ArrayDequeTester());
+		tests.add(new HashMapTester());
+		tests.add(new TreeMapTester());
+		tests.add(new LinkedHashMapTester());
 
 		for (Test t : tests) {
 			TestResult tr = new TestResult(t.getCollectionName());
@@ -42,6 +50,7 @@ public class TestRunner {
 			results.add(tr);
 		}
 
+		Collections.sort(results);
 		for (TestResult tr : results) {
 			tr.display();
 		}

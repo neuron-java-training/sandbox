@@ -1,4 +1,4 @@
-package kollekcioteszter;
+package tester;
 
 public interface Test {
 	

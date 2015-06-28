@@ -1,6 +1,6 @@
-package kollekcioteszter;
+package tester;
 
-public class TestResult {
+public class TestResult implements Comparable<TestResult>{
 	
 	
 	private static final double VIEWRATIO = 100_000d;
@@ -63,6 +63,10 @@ public class TestResult {
 	public void setDuplicateEliminationTime(long duplicateEliminationTime) {
 		this.duplicateEliminationTime = duplicateEliminationTime;
 	}
+	
+	public double getAverageScore(){
+		return (initTime+fillTime+sortTime+accessTime+deletionTime+duplicateEliminationTime)/5;
+	}
 
 	public void display() {
 		System.out.println("Collection: " + collectionName);
@@ -72,8 +76,14 @@ public class TestResult {
 		System.out.println("Access time: " + accessTime / VIEWRATIO);
 		System.out.println("Deletion time: " + deletionTime / VIEWRATIO);
 		System.out.println("Duplicate elimination time: " + duplicateEliminationTime / VIEWRATIO);
+		System.out.println("Average Score: " + getAverageScore() / VIEWRATIO);
 		System.out.println();
 		
+	}
+
+	@Override
+	public int compareTo(TestResult o) {
+		return ((Double)getAverageScore()).compareTo(o.getAverageScore());
 	}
 	
 }
