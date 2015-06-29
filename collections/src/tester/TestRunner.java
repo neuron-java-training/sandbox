@@ -2,6 +2,10 @@ package tester;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 import dequeue.ArrayDequeTester;
 import queue.PriorityQueueTester;
@@ -9,7 +13,9 @@ import sets.HashSetTester;
 import sets.LinkedHashSetTester;
 import sets.TreeSetTester;
 import lists.ArrayListTester;
+import lists.GenericListTester;
 import lists.LinkedListTester;
+import map.GenericMapTester;
 import map.HashMapTester;
 import map.LinkedHashMapTester;
 import map.TreeMapTester;
@@ -26,7 +32,6 @@ public class TestRunner {
 	public void runTests() {
 
 		tests.add(new ArrayListTester());
-		
 		tests.add(new LinkedListTester());
 		tests.add(new HashSetTester());
 		tests.add(new TreeSetTester());

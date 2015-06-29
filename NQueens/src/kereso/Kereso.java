@@ -47,8 +47,9 @@ public abstract class Kereso
   
   public void kiirMegoldas( Csucs cs )
   {
-    if ( megoldasAllapot )
+    if ( megoldasAllapot ){
       System.out.println( cs.getAllapot() );
+    }
     else if ( cs != null )
     {
       kiirMegoldas( cs.getSzulo() );

@@ -50,17 +50,29 @@ public class State extends Allapot{
 			for(int j = 0; j < TestRunner.N; j++){
 				if(mezo[i][j] == true){
 					kiralynok.add(new Koordinata(i, j));
-					//System.out.println("Q-k :" + i + " " + j);
 				}
 			}
 		}
 		if(kiralynok.size() == TestRunner.N){
-			for(int i = 0; i < kiralynok.size(); i++){
-				for(int j = i + 1; j < kiralynok.size(); j++){
-					if(kiralynok.get(i).getX() - kiralynok.get(j).getX() == 
-							kiralynok.get(i).getY() - kiralynok.get(j).getY()){
+			for(int i = 0; i< TestRunner.N; i++){
+				for(int j = 0; j< TestRunner.N; j++){
+					if(j == i)
+						continue;
+					if(kiralynok.get(i).getY() == kiralynok.get(j).getY())
 						return false;
-					}
+					int dx = kiralynok.get(j).getX() - kiralynok.get(i).getX();
+					if(kiralynok.get(i).getY() + dx == kiralynok.get(j).getY())
+						return false;
+					if(kiralynok.get(i).getY() - dx == kiralynok.get(j).getY())
+						return false;
+					/*if((kiralynok.get(i).getX() - kiralynok.get(j).getX()) == 
+							(kiralynok.get(i).getY() - kiralynok.get(j).getY())){
+						System.out.println("I. x: "+kiralynok.get(i).getX() +
+								" y: " +kiralynok.get(i).getY() + 
+								" II. x: " +kiralynok.get(j).getX() +
+								" y: " +kiralynok.get(j).getY());
+						return false;
+					}	*/
 				}
 			}
 			return true;

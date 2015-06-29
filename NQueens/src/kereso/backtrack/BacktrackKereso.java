@@ -77,7 +77,7 @@ public class BacktrackKereso extends Kereso
       }
       if ( korlat > 0 && aktualis.getMelyseg() == korlat )
       {
-        System.out.println( "Elertem a korlatot, visszalepek." );
+        //System.out.println( "Elertem a korlatot, visszalepek." );
         aktUt.pop();
         continue;
       }
