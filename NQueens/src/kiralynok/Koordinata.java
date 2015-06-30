@@ -2,33 +2,33 @@ package kiralynok;
 
 public class Koordinata {
 	
-	private int x;
-	private int y;
+	private int sor;
+	private int oszlop;
 	
 	public Koordinata(int u, int v){
-		x = u;
-		y = v;
+		sor = u;
+		oszlop = v;
 	}
 	
-	public int getX() {
-		return x;
+	public int getSor() {
+		return sor;
 	}
-	public void setX(int x) {
-		this.x = x;
+	public void setSor(int x) {
+		this.sor = x;
 	}
-	public int getY() {
-		return y;
+	public int getOszlop() {
+		return oszlop;
 	}
-	public void setY(int y) {
-		this.y = y;
+	public void setOszlop(int y) {
+		this.oszlop = y;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
+		result = prime * result + sor;
+		result = prime * result + oszlop;
 		return result;
 	}
 
@@ -41,9 +41,9 @@ public class Koordinata {
 		if (getClass() != obj.getClass())
 			return false;
 		Koordinata other = (Koordinata) obj;
-		if (x != other.x)
+		if (sor != other.sor)
 			return false;
-		if (y != other.y)
+		if (oszlop != other.oszlop)
 			return false;
 		return true;
 	}

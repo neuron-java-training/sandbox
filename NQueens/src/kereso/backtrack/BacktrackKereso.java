@@ -1,7 +1,8 @@
 package kereso.backtrack;
 
+import java.util.LinkedList;
 import java.util.Set;
-import java.util.Stack;
+
 import allapotter.*;
 import kereso.Kereso;
 
@@ -9,12 +10,12 @@ public class BacktrackKereso extends Kereso
 {
   public static final int KOR_FIGYELES = 4;
   
-  protected Stack<BacktrackCsucs> aktUt;
+  protected LinkedList<BacktrackCsucs> aktUt;
   protected int korlat;
   protected boolean korFigyeles;
   
   {
-    aktUt = new Stack<BacktrackCsucs>();
+    aktUt = new LinkedList<BacktrackCsucs>();
     korlat = 0;
     korFigyeles = false;
   }
@@ -58,8 +59,10 @@ public class BacktrackKereso extends Kereso
   @Override
   public void keres()
   {
-    while ( !aktUt.empty() )
+	  begin = System.nanoTime();
+    while ( !aktUt.isEmpty() )
     {
+    	lepesszam++;
       BacktrackCsucs aktualis = aktUt.peek();
       //System.out.println( "Aktualis allapot: " + aktualis.getAllapot() );
       if ( aktualis.getAllapot().celAllapot() )
@@ -98,11 +101,13 @@ public class BacktrackKereso extends Kereso
         aktUt.push( uj );
       alkOp.remove( op );
     }
+    end = System.nanoTime();
+	runtime = end - begin;
   }
   
   @Override
   public String toString()
   {
-    return "Kereses backtrack algoritmussal.\n" + jellemzok();
+    return "Kereses backtrack algoritmussal."/* + jellemzok()*/;
   }
 }

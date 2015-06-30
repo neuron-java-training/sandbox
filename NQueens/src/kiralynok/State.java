@@ -3,7 +3,7 @@ package kiralynok;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import finder.Finder;
+import main.Finder;
 import allapotter.Allapot;
 import allapotter.HibasOperatorException;
 import allapotter.Operator;
@@ -12,94 +12,58 @@ public class State extends Allapot{
 	
 	static {
         operatorok = new HashSet<Operator>();
-        /*for(int i = 0; i < Finder.N; i++){
-			for(int j = 0; j < Finder.N; j++){
-				operatorok.add(new Operation(i,j));
-			}
-		}*/
         for(int i = 0; i < Finder.N; i++){
 			operatorok.add(new Operation(i));
 		}
     }
 	
-	private boolean[][] mezo;
+	ArrayList<Koordinata> kiralynok = new ArrayList<>(Finder.N);
 	private int oszlop;
 	private int sor;
 	
 	public State(State s){
-		mezo = new boolean[Finder.N][Finder.N];
-		for(int i = 0; i < Finder.N; i++){
-			for(int j = 0; j < Finder.N; j++){
-				mezo[i][j] = s.getMezo()[i][j];
-			}
-		}
+		kiralynok.addAll(s.getKiralynok());
+		allapotok++;
 	}
 
 	public State(){
-		mezo = new boolean[Finder.N][Finder.N];
-		for(int i = 0; i < Finder.N; i++){
-			for(int j = 0; j < Finder.N; j++){
-				mezo[i][j] = false;
-			}
-		}
 		oszlop = -1;
 		sor = -1;
+		allapotok++;
 	}
 
 	@Override
 	public boolean celAllapot() {
 		if(sor < Finder.N - 1)
 			return false;
-		ArrayList<Koordinata> kiralynok = new ArrayList<>(Finder.N);
-		for(int i = 0; i < Finder.N; i++){
-			for(int j = 0; j < Finder.N; j++){
-				if(mezo[i][j] == true){
-					kiralynok.add(new Koordinata(i, j));
-				}
-			}
-		}
-		for(int i = 0; i< Finder.N; i++){
-			for(int j = 0; j< Finder.N; j++){
-				if(j == i)
-					continue;
-				if(kiralynok.get(i).getY() == kiralynok.get(j).getY())
-					return false;
-				int dx = kiralynok.get(j).getX() - kiralynok.get(i).getX();
-				if(kiralynok.get(i).getY() + dx == kiralynok.get(j).getY())
-					return false;
-				if(kiralynok.get(i).getY() - dx == kiralynok.get(j).getY())
-					return false;
-			}
-		}
 		return true;
 	}
 
 	@Override
 	public boolean elofeltetel(Operator op) throws HibasOperatorException {
-//		Operation on = (Operation)op;
-//		if(on.getSor() == sor + 1 && on.getOszlop() != oszlop)
-//			return true;
-//		return false;
-		if(sor < Finder.N - 1)
-			return true;
-		return false;
+		if(sor >= Finder.N - 1)
+			return false;
+		Operation on = (Operation)op;
+		for(Koordinata k : kiralynok){
+			if(on.getOszlop() == k.getOszlop())
+				return false;
+			int dx = (sor+1) - k.getSor();
+			if(on.getOszlop() + dx == k.getOszlop())
+				return false;
+			if(on.getOszlop() - dx == k.getOszlop())
+				return false;
+		}	
+		return true;
 	}
 
 	@Override
 	public Allapot alkalmaz(Operator op) throws HibasOperatorException {
 		Operation on = (Operation) op;
 		State s = new State(this);
-//		s.getMezo()[on.getSor()][on.getOszlop()] = true;
-//		s.setOszlop(on.getOszlop());
-//		s.setSor(on.getSor());
-		s.getMezo()[sor+1][on.getOszlop()] = true;
 		s.setOszlop(on.getOszlop());
 		s.setSor(sor+1);
+		s.getKiralynok().add(new Koordinata(sor+1, on.getOszlop()));
 		return s;
-	}
-	
-	public boolean[][] getMezo() {
-		return mezo;
 	}
 	
 	public int getOszlop() {
@@ -122,7 +86,7 @@ public class State extends Allapot{
 	public String toString(){
 		StringBuffer result = new StringBuffer();
 		result.append('\n');
-		for(int i = 0; i < Finder.N; i++){
+		/*for(int i = 0; i < Finder.N; i++){
 			for(int j = 0; j < Finder.N; j++){
 				if(mezo[i][j] == true){
 					result.append("o");
@@ -133,9 +97,11 @@ public class State extends Allapot{
 			}
 			result.append('\n');
 		}
-		result.append('\n');
+		result.append('\n');*/
 		return result.toString();
 	}
 	
-	
+	public ArrayList<Koordinata> getKiralynok(){
+		return kiralynok;
+	}
 }

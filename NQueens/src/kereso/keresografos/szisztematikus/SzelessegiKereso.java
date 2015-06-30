@@ -40,17 +40,16 @@ public class SzelessegiKereso extends KeresografosKereso
   @Override
   public void keres()
   {
+	  begin = System.nanoTime();
     while ( !nyiltak.isEmpty() )
     {
-      //System.out.println( "nyiltak: " + nyiltak.size() + ", zartak: " + zartak.size() );
-//      kiirAdatbazis();
+    	lepesszam++;
       Csucs aktualis = nyiltak.getFirst();
       if ( aktualis.getAllapot().celAllapot() )
       {
         terminalisok.add( aktualis );
         if ( osszesMegoldas )
         {
-          //System.out.println( "Megoldast talaltam." );
           zartak.add( nyiltak.removeFirst() );
           continue;
         }
@@ -60,12 +59,13 @@ public class SzelessegiKereso extends KeresografosKereso
       zartak.add( nyiltak.removeFirst() );
       kiterjeszt( aktualis );
     }
-    System.out.println( "nyiltak: " + nyiltak.size() + ", zartak: " + zartak.size() );
+    end = System.nanoTime();
+	runtime = end - begin;
   }
 
   @Override
   public String toString()
   {
-    return "Kereses szelessegi keresovel.\n" + jellemzok();
+    return "Kereses szelessegi keresovel."/* + jellemzok()*/;
   }
 }

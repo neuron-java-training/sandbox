@@ -1,12 +1,16 @@
 package kereso;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
+
+import allapotter.Allapot;
 
 public abstract class Kereso
 {
   public static final int OSSZES_MEGOLDAS = 1;
   public static final int MEGOLDAS_ALLAPOT = 2;
+  protected static long lepesszam = 0;
+  protected long begin, end, runtime;
 
   protected boolean osszesMegoldas;
   protected boolean megoldasAllapot;
@@ -16,7 +20,7 @@ public abstract class Kereso
   {
     osszesMegoldas = false;
     megoldasAllapot = false;
-    terminalisok = new ArrayList<Csucs>();
+    terminalisok = new LinkedList<Csucs>();
   }
   
   protected Kereso( int jellemzok )
@@ -55,6 +59,15 @@ public abstract class Kereso
       kiirMegoldas( cs.getSzulo() );
       System.out.println( cs );
     }
+  }
+  
+  public void eredmenyKiiras(){
+	System.out.println(this);
+	System.out.println( "Megoldasok szama: " + getTerminalisok().size() );
+	System.out.println("Futásidõ: " + runtime/100_000);
+	System.out.println("Létrehozott állapotok: " + Allapot.getAllapotok());
+	System.out.println("Megtett ciklusok: " + lepesszam);
+	System.out.println();
   }
   
   public abstract void keres();
