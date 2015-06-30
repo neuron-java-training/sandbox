@@ -5,22 +5,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
-import dequeue.ArrayDequeTester;
-import queue.PriorityQueueTester;
-import sets.HashSetTester;
-import sets.LinkedHashSetTester;
-import sets.TreeSetTester;
-import lists.ArrayListTester;
+import sets.GenericSetTester;
 import lists.GenericListTester;
-import lists.LinkedListTester;
 import map.GenericMapTester;
-import map.HashMapTester;
-import map.LinkedHashMapTester;
-import map.TreeMapTester;
 
 public class GenericTestRunner {
 
@@ -56,28 +48,40 @@ public class GenericTestRunner {
 		LinkedHashMap<TestObject,TestObject> lhm = new LinkedHashMap<>();
 		GenericMapTester<LinkedHashMap<TestObject,TestObject>> lhmt = new GenericMapTester<>(lhm);
 		end = System.nanoTime();
-		hmt.setCreationTime(end-begin);
+		lhmt.setCreationTime(end-begin);
 		
 		begin = System.nanoTime();
 		TreeMap<TestObject,TestObject> tm = new TreeMap<>();
 		GenericMapTester<TreeMap<TestObject,TestObject>> tmt = new GenericMapTester<>(tm);
 		end = System.nanoTime();
-		hmt.setCreationTime(end-begin);
+		tmt.setCreationTime(end-begin);
 		
+		begin = System.nanoTime();
+		HashSet<TestObject> hs = new HashSet<>();
+		GenericSetTester<HashSet<TestObject>> hst = new GenericSetTester<>(hs);
+		end = System.nanoTime();
+		hst.setCreationTime(end-begin);
+		
+		begin = System.nanoTime();
+		LinkedHashSet<TestObject> lhs = new LinkedHashSet<>();
+		GenericSetTester<LinkedHashSet<TestObject>> lhst = new GenericSetTester<>(lhs);
+		end = System.nanoTime();
+		lhst.setCreationTime(end-begin);
+		
+		begin = System.nanoTime();
+		TreeSet<TestObject> ts = new TreeSet<>();
+		GenericSetTester<TreeSet<TestObject>> tst = new GenericSetTester<>(ts);
+		end = System.nanoTime();
+		tst.setCreationTime(end-begin);	
 		
 		tests.add(alt);
 		tests.add(llt);
-		//tests.add(new ArrayListTester());
-		//tests.add(new LinkedListTester());
-		tests.add(new HashSetTester());
-		tests.add(new TreeSetTester());
-		tests.add(new LinkedHashSetTester());
-		tests.add(new PriorityQueueTester());
-		tests.add(new ArrayDequeTester());
-		//tests.add(new HashMapTester());
-		tests.add(new TreeMapTester());
-		tests.add(new LinkedHashMapTester());
+		tests.add(hst);
+		tests.add(lhst);
+		tests.add(tst);
 		tests.add(hmt);
+		tests.add(lhmt);
+		tests.add(tmt);
 
 		for (Test t : tests) {
 			TestResult tr = new TestResult(t.getCollectionName());

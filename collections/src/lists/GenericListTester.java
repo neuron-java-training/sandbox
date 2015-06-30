@@ -10,7 +10,7 @@ import tester.Tester;
 
 public class GenericListTester<T extends List<TestObject>> extends Tester implements Test{
 
-	T list;
+	protected T list;
 	private List<TestObject> duplicates;
 	private int[] indexes;
 	protected long begin, end;

@@ -14,7 +14,7 @@ import tester.Tester;
 
 public class GenericMapTester<T extends Map<TestObject,TestObject>> extends Tester implements Test{
 	
-	T map;
+	protected T map;
 	Random random = new Random();
 	private ArrayList<TestObject> duplicates;
 	protected long begin, end;
