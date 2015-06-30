@@ -55,9 +55,9 @@ public class TestResult {
 
 	@Override
 	public String toString() {
-		return "TestResult [testName=" + testName + ", initTime=" + initTime
+		return  testName + ":  initTime=" + initTime
 				+ ", accessTime=" + accessTime + ", deleteTime=" + deleteTime
-				+ ", sortTime=" + sortTime + "]";
+				+ ", sortTime=" + sortTime;
 	}
 
 	

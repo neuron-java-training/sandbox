@@ -2,18 +2,13 @@ package hu.neuron.java.CollectionTest;
 
 public abstract class Tester implements TesterInterface{
 
-	private String testName = null;
-
-	public Tester(String testName) {
+	public static final int LIST_SIZE = 1_000_000;
+	public static final int TEST_SIZE = 1_000;
+	
+	public Tester() {
 		super();
-		this.testName = testName;
 	}
 
-	public String getTestName() {
-		return testName;
-	}
+	public abstract String getTestName();
 
-	public void setTestName(String testName) {
-		this.testName = testName;
-	}	
 }

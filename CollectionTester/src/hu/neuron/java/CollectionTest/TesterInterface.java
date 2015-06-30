@@ -2,9 +2,9 @@ package hu.neuron.java.CollectionTest;
 
 public interface TesterInterface {
 
-	public void init(int size);
-	public void sort() throws UnsupportedOperationException ;
-	public void get(int count);
-	public void delete(int count);
+	public long init(int size);
+	public long sort() throws UnsupportedOperationException ;
+	public long get(int count);
+	public long delete(int count);
 	
 }
