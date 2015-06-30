@@ -1,8 +1,11 @@
 package tester;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class TestResult implements Comparable<TestResult>{
 	
-	
+	public static FileWriter fw;
 	private static final double VIEWRATIO = 100_000d;
 	private long initTime;
 	private long fillTime;
@@ -65,7 +68,7 @@ public class TestResult implements Comparable<TestResult>{
 	}
 	
 	public double getAverageScore(){
-		return (initTime+fillTime+sortTime+accessTime+deletionTime+duplicateEliminationTime)/5;
+		return (initTime+fillTime+sortTime+accessTime+deletionTime+duplicateEliminationTime)/6;
 	}
 
 	public void display() {
@@ -86,4 +89,21 @@ public class TestResult implements Comparable<TestResult>{
 		return ((Double)getAverageScore()).compareTo(o.getAverageScore());
 	}
 	
+	public synchronized void writeToFile(){
+		String enter = System.getProperty("line.separator");
+			try {
+				fw = new FileWriter("results.txt",true);
+				fw.write("---" + enter);
+				fw.write(collectionName + enter);
+				fw.write((initTime/VIEWRATIO) + enter);
+				fw.write((fillTime / VIEWRATIO) + enter);
+				fw.write((sortTime / VIEWRATIO) + enter);
+				fw.write((accessTime / VIEWRATIO) + enter);
+				fw.write((deletionTime / VIEWRATIO) + enter);
+				fw.write((duplicateEliminationTime / VIEWRATIO) + enter);
+				fw.flush();
+				fw.close();
+			} catch (IOException e) {
+			}
+	}
 }

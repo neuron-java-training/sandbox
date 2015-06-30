@@ -32,15 +32,6 @@ public class BacktrackKereso extends Kereso
     korFigyeles = ( jellemzok & KOR_FIGYELES ) != 0;
   }
   
-  public BacktrackKereso( Allapot kezdoAllapot, int jellemzok, int korlat )
-    throws HibasKorlatException
-  {
-    this( kezdoAllapot, jellemzok );
-    if ( korlat < 1 )
-      throw new HibasKorlatException();
-    this.korlat = korlat;
-  }
-  
   @Override
   public String jellemzok()
   {
