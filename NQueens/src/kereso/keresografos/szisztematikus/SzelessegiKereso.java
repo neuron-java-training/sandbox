@@ -42,8 +42,7 @@ public class SzelessegiKereso extends KeresografosKereso
   {
     while ( !nyiltak.isEmpty() )
     {
-      System.out.println( "nyiltak: " + nyiltak.size()
-        + ", zartak: " + zartak.size() );
+      //System.out.println( "nyiltak: " + nyiltak.size() + ", zartak: " + zartak.size() );
 //      kiirAdatbazis();
       Csucs aktualis = nyiltak.getFirst();
       if ( aktualis.getAllapot().celAllapot() )
@@ -51,7 +50,7 @@ public class SzelessegiKereso extends KeresografosKereso
         terminalisok.add( aktualis );
         if ( osszesMegoldas )
         {
-          System.out.println( "Megoldast talaltam." );
+          //System.out.println( "Megoldast talaltam." );
           zartak.add( nyiltak.removeFirst() );
           continue;
         }
@@ -61,8 +60,7 @@ public class SzelessegiKereso extends KeresografosKereso
       zartak.add( nyiltak.removeFirst() );
       kiterjeszt( aktualis );
     }
-    System.out.println( "nyiltak: " + nyiltak.size()
-      + ", zartak: " + zartak.size() );
+    System.out.println( "nyiltak: " + nyiltak.size() + ", zartak: " + zartak.size() );
   }
 
   @Override
