@@ -42,7 +42,7 @@ public class TestRunner  {
 		
 	}
 	
-	public static void run() {
+	public synchronized static void run() {
 	
 		for (int i = 0; i < tests.size(); i++) {
 			tests.get(i).start();
