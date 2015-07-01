@@ -8,22 +8,24 @@ import java.util.Set;
 
 import run.IO;
 
-public  class  Sets<T extends Set<ComparableItem>> implements Test {
+public  class  Sets<T extends Set<ComparableItem>> implements Test, Runnable {
 
 	protected Set<ComparableItem> items;
 
 	protected Result res = new Result();
+	Class t;
 
 	public  Sets(T t) {
-		this.init(t.getClass());
-		this.sort();
-		this.getElement();
-		this.delete();
-		//System.out.println(items.getClass());
-		res.setName(items.getClass().getName());
-		//System.out.println(res.toString());
-		IO.write(res);
-		//System.out.println(IO.readRes().toString());
+		this.t = t.getClass();
+//		this.init(t.getClass());
+//		this.sort();
+//		this.getElement();
+//		this.delete();
+//		//System.out.println(items.getClass());
+//		res.setName(items.getClass().getName());
+//		//System.out.println(res.toString());
+//		IO.write(res);
+//		//System.out.println(IO.readRes().toString());
 	}
 
 	@Override
@@ -65,6 +67,21 @@ public  class  Sets<T extends Set<ComparableItem>> implements Test {
 	@Override
 	public Result getResult() {
 		return res;
+	}
+
+	@Override
+	public void run() {
+		this.init(t);
+		this.sort();
+		this.getElement();
+		this.delete();
+		//System.out.println(items.getClass());
+		res.setName(items.getClass().getName());
+		
+		//System.out.println(res.toString());
+		IO.write(res);
+		//System.out.println(IO.readRes().toString());
+		
 	}
 
 
