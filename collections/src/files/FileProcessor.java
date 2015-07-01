@@ -99,6 +99,8 @@ public class FileProcessor {
  		} catch (FileNotFoundException e) {
  			System.err.println("No file to process");
  			System.exit(1);
+ 		} finally {
+ 			in.close();
  		}
     }
     
