@@ -1,40 +1,46 @@
-package settest;
+package test;
 
 import item.ComparableItem;
+import item.Result;
 
 import java.util.Iterator;
 import java.util.Set;
 
-import run.Result;
-import test.Test;
+import run.IO;
 
-abstract public class Sets implements Test {
+public  class  Sets<T extends Set<ComparableItem>> implements Test {
 
 	protected Set<ComparableItem> items;
 
 	protected Result res = new Result();
 
-	public Sets(int startIndex) {
-		this.init();
-
+	public  Sets(T t) {
+		this.init(t.getClass());
 		this.sort();
-		this.getElement(startIndex);
-		this.delete(startIndex);
-		System.out.println(items.getClass());
-		System.out.println(res.toString());
+		this.getElement();
+		this.delete();
+		//System.out.println(items.getClass());
+		res.setName(items.getClass().getName());
+		//System.out.println(res.toString());
+		IO.write(res);
+		//System.out.println(IO.readRes().toString());
 	}
 
 	@Override
-	public void init() {
+	public void init(Class<?> t) {
+		long start = System.currentTimeMillis();
+		items = (Set<ComparableItem>) ItemFactory.getItems2(t);
+		long end = System.currentTimeMillis();
+		res.setInit(end - start);
+
 	}
 
 	@Override
 	public void sort() {
-
 	}
 
 	@Override
-	public void getElement(int startIndex) {
+	public void getElement() {
 		long start = System.currentTimeMillis();
 		for (Iterator<ComparableItem> it = items.iterator(); it.hasNext();) {
 			it.next();
@@ -45,7 +51,7 @@ abstract public class Sets implements Test {
 	}
 
 	@Override
-	public void delete(int startIndex) {
+	public void delete() {
 		long start = System.currentTimeMillis();
 		for (Iterator<ComparableItem> it = items.iterator(); it.hasNext();) {
 			it.next();
@@ -60,5 +66,6 @@ abstract public class Sets implements Test {
 	public Result getResult() {
 		return res;
 	}
+
 
 }
