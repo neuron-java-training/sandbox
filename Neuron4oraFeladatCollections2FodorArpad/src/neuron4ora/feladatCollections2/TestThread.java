@@ -17,75 +17,35 @@ public class TestThread<T extends TestInterface> implements Runnable {
 		this.fileCounter = fileCounter;
 	}
 
-	public void run() {
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println("init muvelet eredmenye: ");
-		} catch (Exception e) {
-		}
+	public void run() {	
+		writer("init muvelet eredmenye: ");
 		timer = System.nanoTime();
 		t.init();
 		testResult.setInitTime(System.nanoTime() - timer);
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println(t.getDatas());
-		} catch (Exception e) {
-		}
+		writer(t.getDatas());
 
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println("getItem(10) muvelet eredmenye: ");
-		} catch (Exception e) {
-		}
+		writer("getItem(10) muvelet eredmenye: ");
 		timer = System.nanoTime();
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println(t.getItem(10));
-		} catch (Exception e) {
-		}
+		writer(t.getItem(10));
 		testResult.setGetItemTime(System.nanoTime() - timer);
 
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println("sorting muvelet eredmenye: ");
-		} catch (Exception e) {
-		}
+		writer("sorting muvelet eredmenye: ");
 		timer = System.nanoTime();
 		t.sorting();
 		testResult.setSortingTime(System.nanoTime() - timer);
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println(t.getDatas());
-		} catch (Exception e) {
-		}
+		writer(t.getDatas());
 
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println("deleteItemsByRange(10, 15) muvelet eredmenye: ");
-		} catch (Exception e) {
-		}
+		writer("deleteItemsByRange(10, 15) muvelet eredmenye: ");
 		timer = System.nanoTime();
 		t.deleteItemsByRange(10, 15);
 		testResult.setDeleteItemsByRangeTime(System.nanoTime() - timer);
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println(t.getDatas());
-		} catch (Exception e) {
-		}
+		writer(t.getDatas());
 
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println("duplicationClear muvelet eredmenye: ");
-		} catch (Exception e) {
-		}
+		writer("duplicationClear muvelet eredmenye: ");
 		timer = System.nanoTime();
 		t.duplicationClear();
 		testResult.setDuplicationClearTime(System.nanoTime() - timer);
-		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
-				+ testResult.getName() + ".txt", true))) {
-			output.println(t.getDatas());
-		} catch (Exception e) {
-		}
+		writer(t.getDatas());
 
 		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
 				+ "result.txt", true))) {
@@ -99,6 +59,13 @@ public class TestThread<T extends TestInterface> implements Runnable {
 					/ 1_000_000+" ms");
 		} catch (Exception e) {
 		}
-
+	}
+	
+	private void writer(Object text){
+		try (PrintWriter output = new PrintWriter(new FileWriter("test" + fileCounter
+				+ testResult.getName() + ".txt", true))) {
+			output.println(text);
+		} catch (Exception e) {
+		}
 	}
 }
