@@ -40,6 +40,7 @@ public class FileProcessor {
  				}
  				
  				TestResult tr = new TestResult(block[0]);
+
  				Double tmp = Double.parseDouble(block[1]);
  				tr.setInitTime((long) (tmp * TestResult.VIEWRATIO));
  				tmp = Double.parseDouble(block[2]);
@@ -52,6 +53,7 @@ public class FileProcessor {
  				tr.setDeletionTime((long) (tmp * TestResult.VIEWRATIO));
  				tmp = Double.parseDouble(block[6]);
  				tr.setDuplicateEliminationTime((long) (tmp * TestResult.VIEWRATIO));
+ 				
  				results.add(tr);		
  			}
  			

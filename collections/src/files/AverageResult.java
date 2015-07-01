@@ -91,7 +91,7 @@ public class AverageResult implements Comparable<AverageResult>{
 	}
 	
 	public double getAverageScore(){
-		return (initTime/n+fillTime/n+sortTime/n+accessTime/n+deletionTime/n+duplicateEliminationTime/n)/6;
+		return ((initTime+fillTime+sortTime+accessTime+deletionTime+duplicateEliminationTime)/n)/6;
 	}
 
 	@Override
