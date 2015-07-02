@@ -7,12 +7,16 @@ import queenPuzzle.Operator;
 public class Solution {
 
 	private List<Operator> solution = null;
-	private String name = null;
+        private String name = null;
+        private int instances = 0;
+        private long runTime = 0;
 	
-	public Solution(List<Operator> solution, String name) {
+	public Solution(List<Operator> solution, long runTime, int instances, String name) {
 		super();
 		this.solution = solution;
 		this.name = name;
+                this.instances = instances;
+                this.runTime = runTime;
 	}
 	
 	public void printSolution(){
@@ -43,6 +47,7 @@ public class Solution {
 			System.out.println("|");
 			System.out.println(getRowSeparator());
 		}
+                System.out.println("\n Time: " + runTime + " Nodes: " + instances);
 	}
 
 	public String getName() {

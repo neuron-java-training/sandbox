@@ -59,7 +59,7 @@ public class Operator implements OperatorInterface{
 
 	@Override
 	public String toString() {
-		return "Operator [row=" + (row+1) + ", col=" + (col+1) + "]";
+		return "Operator [row=" + (row) + ", col=" + (col) + "]";
 	}
 
 	@Override

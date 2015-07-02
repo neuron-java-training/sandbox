@@ -1,7 +1,8 @@
-package solver;
+package solver.GraphBased;
 
 import queenPuzzle.Operator;
 import queenPuzzle.State;
+import solver.Node;
 
 public class GraphNode extends Node{
 
@@ -9,7 +10,6 @@ public class GraphNode extends Node{
 	
 	public GraphNode(State initialState) {
 		super(initialState);
-		
 	}
 
 	public GraphNode(State state, Operator producerOperator, GraphNode parent) {
