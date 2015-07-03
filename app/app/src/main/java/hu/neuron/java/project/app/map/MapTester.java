@@ -61,7 +61,7 @@ public class MapTester extends BasicTest{
 		begin = System.nanoTime();
 		for(TestObject to : duplicates){
 			map.remove(to);
-		};
+		}
 		end = System.nanoTime();
 		return end - begin;
 	}
