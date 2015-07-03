@@ -3,6 +3,8 @@ package hu.neuron.java.project.app.tester;
 import hu.neuron.java.project.app.lists.GenericListTester;
 import hu.neuron.java.project.app.map.GenericMapTester;
 import hu.neuron.java.project.app.sets.GenericSetTester;
+import hu.neuron.java.project.common.interfaces.Writer;
+import hu.neuron.java.project.core.FileWriter;
 import hu.neuron.java.project.core.TestResult;
 
 import java.util.ArrayList;
@@ -13,19 +15,21 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class GenericTestRunner {
 
 	public ArrayList<Test> tests;
-	public ArrayList<TestResult> results = new ArrayList<>();
-
-	public GenericTestRunner() {
-		tests = new ArrayList<>();
-	}
+	public ArrayList<TestResult> results;
+	private Writer writer;
 
 	public void runTests() {
+		tests = new ArrayList<>();
+		results = new ArrayList<>();
 
 		long begin, end;
 		begin = System.nanoTime();
@@ -85,13 +89,29 @@ public class GenericTestRunner {
 		tests.add(tst);
 			
 		ExecutorService executor = Executors.newFixedThreadPool(8);
-		ArrayList<Runnable> threads = new ArrayList<>();
+		ArrayList<Callable<TestResult>> threads = new ArrayList<>(8);
+		ArrayList<Future<TestResult>> futures = new ArrayList<>(8);
+		
 		for (Test t : tests) {
-			threads.add(new WriterThread(t));
+			threads.add(new CallableResultGenerator(t));
 		}
-		for(Runnable r : threads){
-			executor.submit(r);
+		for(Callable<TestResult> c : threads){
+			futures.add(executor.submit(c));
 		}
+		
 		executor.shutdown();
+
+		ArrayList<TestResult> results = new ArrayList<>(8);
+		for(Future<TestResult> f : futures){
+			try {
+				results.add(f.get());
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		writer = new FileWriter(results);
+		writer.write();
+
 	}
 }

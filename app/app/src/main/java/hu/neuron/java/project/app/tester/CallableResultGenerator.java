@@ -1,21 +1,20 @@
 package hu.neuron.java.project.app.tester;
 
-import hu.neuron.java.project.common.interfaces.Writer;
-import hu.neuron.java.project.core.FileWriter;
+import java.util.concurrent.Callable;
+
 import hu.neuron.java.project.core.TestResult;
 
 
-public class WriterThread implements Runnable {
+public class CallableResultGenerator implements Callable<TestResult> {
 
 	private Test test;
-	Writer writer;
 	
-	public WriterThread(Test t){
+	public CallableResultGenerator(Test t){
 		test = t;
 	}
 	
 	@Override
-	public void run() {
+	public TestResult call() {
 		TestResult tr = new TestResult(test.getCollectionName());
 		tr.setInitTime(test.creationTest());
 		tr.setFillTime(test.fillTest());
@@ -23,7 +22,7 @@ public class WriterThread implements Runnable {
 		tr.setAccessTime(test.accessTest(3000));
 		tr.setDeletionTime(test.deletionTest(2500, 3900));
 		tr.setDuplicateEliminationTime(test.removeDuplicates());
-		(new FileWriter(tr)).write();
+		return tr;
 	}
 
 }

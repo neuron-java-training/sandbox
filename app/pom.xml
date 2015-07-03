@@ -5,6 +5,14 @@
 	<artifactId>project</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>project</name>
+	<url>http://maven.apache.org</url>
+	<distributionManagement>
+		<site>
+			<id>http://192.168.1.23/</id>
+			<url>file:\\192.168.1.23\www\MiskolczyJozsef\${project.name}\${project.version}\</url>
+		</site>
+	</distributionManagement>
 	<developers>
 		<developer>
 			<name>József Miskolczy</name>

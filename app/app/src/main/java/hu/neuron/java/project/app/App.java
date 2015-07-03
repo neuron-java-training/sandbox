@@ -5,7 +5,7 @@ import hu.neuron.java.project.common.interfaces.Reader;
 import hu.neuron.java.project.core.FileProcessor;
 
 /**
- * Hello world!
+ * Hello Collections!
  *
  */
 public class App 
@@ -13,9 +13,9 @@ public class App
     public static void main( String[] args )
     {
         GenericTestRunner runner = new GenericTestRunner();
-        for(int i = 0; i < 5 ; i++){
-        	runner.runTests();
-        }
+		for(int i = 0; i < 5; i++){
+			runner.runTests();
+		}
         Reader reader = new FileProcessor();
         reader.read();
     }
