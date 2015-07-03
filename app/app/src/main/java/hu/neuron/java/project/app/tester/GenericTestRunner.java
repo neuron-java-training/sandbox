@@ -94,10 +94,4 @@ public class GenericTestRunner {
 		}
 		executor.shutdown();
 	}
-
-	public static void main(String[] args) {
-		GenericTestRunner runner = new GenericTestRunner();
-		runner.runTests();
-	}
-
 }
