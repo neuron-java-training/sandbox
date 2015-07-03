@@ -1,10 +1,10 @@
 package hu.neuron.java.project.app;
 
-import hu.neruon.java.project.common.Test;
-
+import hu.neuron.java.project.common.Test;
 import hu.neuron.java.project.core.IO;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -17,16 +17,16 @@ import java.util.TreeSet;
 public class TestRunner implements Test {
 	static final long db = 5000000;
 	static final List<TestResults> testresults = new ArrayList<>();
-	
+
 	public static void main(String[] args) {
 		TestRunner testrunner = new TestRunner();
 		testrunner.TimeCounter();
 		testrunner.order();
-		
-		//testrunner.getElement("java.util.LinkedList");
+
+		// testrunner.getElement("java.util.LinkedList");
 		IO io = new IO();
 		io.write(testresults);
-		
+
 		io.read();
 	}
 
@@ -36,9 +36,9 @@ public class TestRunner implements Test {
 
 			@Override
 			public int compare(TestResults o1, TestResults o2) {
-				
-			int cmp = o1.getInitTime() - o2.getInitTime();
-			return cmp;
+
+				int cmp = o1.getInitTime() - o2.getInitTime();
+				return cmp;
 			}
 		});
 
@@ -89,7 +89,7 @@ public class TestRunner implements Test {
 		testresults.add(adder);
 
 		Set<Items> sethelp = new HashSet<>();
-		
+
 		a = System.currentTimeMillis();
 		init(sethelp);
 		b = System.currentTimeMillis();
@@ -97,11 +97,11 @@ public class TestRunner implements Test {
 
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.HashSet"));
-		
+
 		testresults.add(adder);
-		
+
 		sethelp = new TreeSet<>();
-		
+
 		a = System.currentTimeMillis();
 		init(sethelp);
 		b = System.currentTimeMillis();
@@ -109,28 +109,18 @@ public class TestRunner implements Test {
 
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.TreeSet"));
-		
-		testresults.add(adder);
 
-		
+		testresults.add(adder);
 
 	}
 
 	@Override
-	public void init(Set t) {
+	public void init(Collection t) {
 		Random rand = new Random();
 		for (int i = 0; i < db; i++) {
 			int values = rand.nextInt();
 			t.add(values);
 		}
 
-	}
-
-	public void init(List t) {
-		Random rand = new Random();
-		for (int i = 0; i < db; i++) {
-			int values = rand.nextInt();
-			t.add(values);
-		}
 	}
 }
