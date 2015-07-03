@@ -8,8 +8,5 @@ public class TreeSetTester extends SetTester{
 
 	public TreeSetTester() {
 		super(new TreeSet<CollectionElement>());
-	}
-
-	
-	
+	}	
 }

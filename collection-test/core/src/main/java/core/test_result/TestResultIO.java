@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 
 public class TestResultIO implements IOOperationsInterface {
 
-	private final String FILE_PATH = "Result.txt";
+	public static final String FILE_PATH = "Result.txt";
 
 	public TestResultIO() {
 		super();

@@ -12,21 +12,23 @@ import common.collection_test.Tester;
 
 public class ListTester extends Tester{
 
-	protected List<CollectionElement> list = null;
+	private List<CollectionElement> list = null;
 	private Random random = new Random();
-
+	private CollectionElementFactory factory = null; 
+	
+	
 	public ListTester(List<CollectionElement> list) {
 		super();
 		this.list = list;
+		this.factory = new CollectionElementFactory();
 	}
 
 	@Override
 	public long init(int size) {
 		Date start = new Date();
 
-		CollectionElementFactory factory = new CollectionElementFactory();
 		for (int i = 0; i < size; i++) {
-			list.add(factory.getRandomListItem());
+			list.add(factory.getRandomCollectionElement());
 		}
 
 		Date end = new Date();
@@ -36,9 +38,9 @@ public class ListTester extends Tester{
 	@Override
 	public long sort() {
 		Date start = new Date();
-		
+
 		Collections.sort(list);
-		
+
 		Date end = new Date();
 		return end.getTime() - start.getTime();
 	}
@@ -58,11 +60,11 @@ public class ListTester extends Tester{
 	@Override
 	public long delete(int count) {
 		Date start = new Date();
-		
+
 		for (int i = 0; i < count; i++) {
 			list.remove(random.nextInt(list.size()));
 		}
-		
+
 		Date end = new Date();
 		return end.getTime() - start.getTime();
 	}
@@ -71,5 +73,4 @@ public class ListTester extends Tester{
 	public String getTestName() {
 		return list.getClass().getName();
 	}
-
 }

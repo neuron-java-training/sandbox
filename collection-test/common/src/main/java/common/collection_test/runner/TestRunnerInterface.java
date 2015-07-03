@@ -7,10 +7,10 @@ import core.test_result.TestResult;
 
 public interface TestRunnerInterface {
 
-public void addTest(Tester tester);
-	
+	public void addTest(Tester tester);
+
 	public List<TestResult> runAllTest();
 
 	public List<TestResult> getResultList();
-	
+
 }

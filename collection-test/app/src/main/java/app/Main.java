@@ -11,14 +11,11 @@ public class Main {
 
 	public Main() {
 		TestRunner testRunner = new TestRunner();
-
 		testRunner.addTest(new ArrayListTester());
 		testRunner.addTest(new TreeSetTester());
 		testRunner.addTest(new LinkedHashSetTester());
 		testRunner.addTest(new LinkedListTester());
-		
 		testRunner.runAllTest();
-
 		TestResultIO io = new TestResultIO();
 		io.writeList(testRunner.getResultList());
 		io.read();

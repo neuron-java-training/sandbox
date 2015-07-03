@@ -1,10 +1,10 @@
 package app.collection_element;
 
-public class CollectionElement implements Comparable<CollectionElement>{
+public class CollectionElement implements Comparable<CollectionElement> {
 
 	private int id;
 	private String value;
-	
+
 	public CollectionElement() {
 	}
 
@@ -41,20 +41,26 @@ public class CollectionElement implements Comparable<CollectionElement>{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null){
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		CollectionElement other = (CollectionElement) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		if (value == null) {
-			if (other.value != null)
+			if (other.value != null) {
 				return false;
-		} else if (!value.equals(other.value))
+			}
+		} else if (!value.equals(other.value)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -66,5 +72,5 @@ public class CollectionElement implements Comparable<CollectionElement>{
 	@Override
 	public int compareTo(CollectionElement ce) {
 		return Integer.compare(this.id, ce.id);
-	}	
+	}
 }

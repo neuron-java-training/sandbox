@@ -6,4 +6,6 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>core</artifactId>
+  <name>Core</name>
+  <description>A collection-test core modulja.</description>
 </project>

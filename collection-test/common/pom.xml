@@ -21,4 +21,6 @@
 		</dependency>
 	</dependencies>
 
+  	<name>Common</name>
+  	<description>A collection-test common modulja.</description>
 </project>

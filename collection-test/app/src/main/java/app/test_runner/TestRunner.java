@@ -37,6 +37,7 @@ public class TestRunner implements TestRunnerInterface{
 			try {
 				resultList.add(future.get());
 			} catch (Exception e) {
+				e.printStackTrace();
 			} 
 		}
 		
