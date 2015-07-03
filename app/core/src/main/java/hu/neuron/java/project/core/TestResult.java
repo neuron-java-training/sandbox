@@ -1,11 +1,8 @@
-package tester;
-
-import java.io.FileWriter;
-import java.io.IOException;
+package hu.neuron.java.project.core;
 
 public class TestResult implements Comparable<TestResult>{
 	
-	public static final double VIEWRATIO = 100_000d;
+	public static final double VIEWRATIO = 100_000;
 	private long initTime;
 	private long fillTime;
 	private long sortTime;
@@ -13,7 +10,6 @@ public class TestResult implements Comparable<TestResult>{
 	private long deletionTime;
 	private long duplicateEliminationTime;
 	private String collectionName;
-	private FileWriter fw;
 	
 	public TestResult(String name){
 		collectionName = name;

@@ -1,4 +1,4 @@
-package files;
+package hu.neuron.java.project.core;
 
 public class AverageResult implements Comparable<AverageResult>{
 	

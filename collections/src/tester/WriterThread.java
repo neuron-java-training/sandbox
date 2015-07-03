@@ -1,19 +1,20 @@
-package threads;
+package tester;
 
-import tester.Test;
-import tester.TestResult;
+import interfaces.Writer;
 
-public class TestThread implements Runnable {
+public class WriterThread implements Runnable {
 
 	private Test test;
+	Writer writer;
 	
-	public TestThread(Test t){
+	public WriterThread(Test t, Writer w){
 		test = t;
+		writer = w;
 	}
 	
 	@Override
 	public void run() {
-
+		
 		TestResult tr = new TestResult(test.getCollectionName());
 		tr.setInitTime(test.creationTest());
 		tr.setFillTime(test.fillTest());
@@ -21,7 +22,7 @@ public class TestThread implements Runnable {
 		tr.setAccessTime(test.accessTest(3000));
 		tr.setDeletionTime(test.deletionTest(2500, 3900));
 		tr.setDuplicateEliminationTime(test.removeDuplicates());
-		tr.writeToFile();	
+		writer.write(tr);
 	}
 
 }

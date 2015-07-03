@@ -1,7 +1,9 @@
-package tester;
+package hu.neuron.java.project.app.tester;
 
-import interfaces.Writer;
-import io.FileWriter;
+import hu.neuron.java.project.app.lists.GenericListTester;
+import hu.neuron.java.project.app.map.GenericMapTester;
+import hu.neuron.java.project.app.sets.GenericSetTester;
+import hu.neuron.java.project.core.TestResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +15,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import sets.GenericSetTester;
-import lists.GenericListTester;
-import map.GenericMapTester;
 
 public class GenericTestRunner {
 
@@ -88,9 +86,8 @@ public class GenericTestRunner {
 			
 		ExecutorService executor = Executors.newFixedThreadPool(8);
 		ArrayList<Runnable> threads = new ArrayList<>();
-		Writer fileWriter = new FileWriter();
 		for (Test t : tests) {
-			threads.add(new WriterThread(t,fileWriter));
+			threads.add(new WriterThread(t));
 		}
 		for(Runnable r : threads){
 			executor.submit(r);

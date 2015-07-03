@@ -1,4 +1,6 @@
-package files;
+package hu.neuron.java.project.core;
+
+import hu.neuron.java.project.common.interfaces.Reader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,9 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import tester.TestResult;
-
-public class FileProcessor {
+public class FileProcessor implements Reader{
 	
 	private File file ;
     private Scanner in;
@@ -19,7 +19,7 @@ public class FileProcessor {
     	file = new File("results.txt");
     }
     
-    public void process(){
+    public void read(){
     	 try {
  			in = new Scanner(file);
  			LinkedList<TestResult> results = new LinkedList<>();
@@ -108,6 +108,6 @@ public class FileProcessor {
     
     public static void main(String[] args){
     	FileProcessor fp = new FileProcessor();
-    	fp.process();
+    	fp.read();
     }
 }
