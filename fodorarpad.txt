@@ -1,6 +1,0 @@
-ize
-<<<<<<< HEAD
-ezt is atirtam...
-=======
-modositom
->>>>>>> 48fd064985594be90d9f189d61e0f335a45d790d
