@@ -2,13 +2,19 @@ package hu.neuron.java.project.core;
 
 import hu.neuron.java.project.common.Result;
 
+import java.io.File;
+
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 
 
 
 
 public class IOTest {
+	
+
 
 	@Test
 	public void test1() {
@@ -17,7 +23,7 @@ public class IOTest {
 		res.setDelete(320);
 		res.setGetElement(324);
 		res.setInit(2);
-		res.setName("Arraylist");
+		res.setName("java.util.ArrayList");
 		res.setSort(0);
 		
 		io.write(res);
@@ -25,7 +31,7 @@ public class IOTest {
 		res.setDelete(320);
 		res.setGetElement(324);
 		res.setInit(2);
-		res.setName("Arraylist");
+		res.setName("java.util.ArrayList");
 		res.setSort(0);
 		io.write(res);
 	}

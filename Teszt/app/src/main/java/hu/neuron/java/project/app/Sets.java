@@ -25,7 +25,6 @@ public class Sets<T extends Set<ComparableItem>> implements Test, Runnable {
 		items = (Set<ComparableItem>) ItemFactory.getItems2(t);
 		long end = System.currentTimeMillis();
 		res.setInit(end - start);
-
 	}
 
 	@Override
@@ -40,7 +39,6 @@ public class Sets<T extends Set<ComparableItem>> implements Test, Runnable {
 		}
 		long end = System.currentTimeMillis();
 		res.setGetElement(end - start);
-
 	}
 
 	@Override
@@ -52,7 +50,6 @@ public class Sets<T extends Set<ComparableItem>> implements Test, Runnable {
 		}
 		long end = System.currentTimeMillis();
 		res.setDelete(end - start);
-
 	}
 
 	//@Override

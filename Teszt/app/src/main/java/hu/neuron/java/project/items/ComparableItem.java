@@ -15,7 +15,6 @@ public class ComparableItem extends Item implements Comparable<ComparableItem> {
 		if (this == o) {
 			return 0;
 		}
-
 		return getId().compareTo(o.getId());
 	}
 

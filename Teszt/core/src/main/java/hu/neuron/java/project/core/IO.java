@@ -65,7 +65,6 @@ public class IO implements IOInterface {
 			} else {
 				sum.put(tmp[0], t);
 			}
-
 		}
 
 		for (String key : sum.keySet()) {

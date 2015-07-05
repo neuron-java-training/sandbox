@@ -32,11 +32,9 @@ public class TestRunner {
 				new TreeSet<ComparableItem>())));
 		tests.add(new Thread(new Sets<LinkedHashSet<ComparableItem>>(
 				new LinkedHashSet<ComparableItem>())));
-
 	}
 
 	public synchronized static void run() {
-
 		for (int i = 0; i < tests.size(); i++) {
 			tests.get(i).start();
 		}
@@ -53,7 +51,7 @@ public class TestRunner {
 	public static void IO() {
 		while (true) {
 			if (!TestRunner.isAlive()) {
-				IOInterface io = new IO();	
+				IOInterface io = new IO();
 				io.read();
 				break;
 			} else {
@@ -65,7 +63,6 @@ public class TestRunner {
 				}
 			}
 		}
-
 	}
 
 	public static int getTestNumber() {

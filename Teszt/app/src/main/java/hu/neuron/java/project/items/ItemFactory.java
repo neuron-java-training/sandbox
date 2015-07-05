@@ -16,12 +16,13 @@ public class ItemFactory {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		for (int i = 0; i < MAX_ITEMS; i++) {
 			Random rand = new Random();
 			String tmp = String.valueOf(rand.nextInt());
 			comparableItem.add(new ComparableItem(tmp, tmp));
 		}
-		return comparableItem;
 
+		return comparableItem;
 	}
 }

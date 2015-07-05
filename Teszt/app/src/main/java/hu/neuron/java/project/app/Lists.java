@@ -34,7 +34,6 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 		Collections.sort(items);
 		long end = System.currentTimeMillis();
 		res.setSort(end - start);
-
 	}
 
 	@Override
@@ -45,7 +44,6 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 		}
 		long end = System.currentTimeMillis();
 		res.setGetElement(end - start);
-
 	}
 
 	@Override
@@ -57,10 +55,9 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 
 		long end = System.currentTimeMillis();
 		res.setDelete(end - start);
-
 	}
 
-	//@Override
+	// @Override
 	public Result getResult() {
 		return res;
 	}
@@ -75,7 +72,7 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 		res.setName(items.getClass().getName());
 
 		// System.out.println(res.toString());
-		IO io = new IO();	
+		IO io = new IO();
 		io.write(res);
 		// System.out.println(IO.readRes().toString());
 

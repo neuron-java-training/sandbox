@@ -73,13 +73,4 @@ public class Result implements Serializable, Comparable<Result> {
 		else
 			return 0;
 	}
-	
-
-	
-	
-	
-	
-	
-	
-
 }
