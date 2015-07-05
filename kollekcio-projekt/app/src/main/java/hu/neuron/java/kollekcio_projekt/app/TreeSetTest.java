@@ -3,6 +3,13 @@ package hu.neuron.java.kollekcio_projekt.app;
 import java.util.Random;
 import java.util.TreeSet;
 
+/**
+ * Osztály a {@code Set} interfész {@code TreeSet} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class TreeSetTest extends HashSetTest {
 
 	@Override

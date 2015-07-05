@@ -6,6 +6,13 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 
+/**
+ * Osztály a {@code Deque} interfész {@code ArrayDeque} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class ArrayDequeTest implements Test {
 	protected static final int DEFAULT_SIZE = 1000000;
 	protected Deque<Integer> szamok;
@@ -51,7 +58,5 @@ public class ArrayDequeTest implements Test {
 		super();
 		this.size = DEFAULT_SIZE;
 	}
-	
-	
 
 }

@@ -5,6 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Osztály a {@code Deque} interfész {@code LinkedList} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class LinkedListDequeTest extends ArrayDequeTest {
 
 	@Override

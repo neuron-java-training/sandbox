@@ -54,6 +54,9 @@ public class TestResultDAOFileImpl implements TestResultDAO {
 	 */
 	@Override
 	public List<TestResult> read() {
+		if (fileName == null){
+			return null;
+		}
 		try (Scanner sc = new Scanner(new FileInputStream(fileName))) {
 			List<TestResult> lista = new ArrayList<>();
 			String sor;
@@ -79,9 +82,10 @@ public class TestResultDAOFileImpl implements TestResultDAO {
 	 */
 	@Override
 	public void write(List<TestResult> eredmeny) {
-		if (eredmeny == null) {
+		if (eredmeny == null || fileName == null) {
 			return;
 		}
+		
 		try (PrintWriter writer = new PrintWriter(new FileOutputStream(fileName))) {
 			for (TestResult tr : eredmeny) {
 				writer.println(tr.toString());

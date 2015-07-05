@@ -3,6 +3,13 @@ package hu.neuron.java.kollekcio_projekt.app;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
+/**
+ * Osztály a {@Map} interfész {@code LinkedHashMap} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class LinkedHashMapTest extends HashMapTest {
 
 	@Override

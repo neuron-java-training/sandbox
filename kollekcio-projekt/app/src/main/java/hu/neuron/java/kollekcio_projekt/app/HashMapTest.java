@@ -6,6 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * Osztály a {@code Map} interfész {@code HashMap} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class HashMapTest implements Test {
 	protected static final int DEFAULT_SIZE = 1000000;
 	protected Map<Integer, Integer> szamok;

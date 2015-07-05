@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Osztály a kollekciók tesztjeinek futtatásához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class TestRunner {
 	private List<Test> tests;
 	private static final int N = 5000;
@@ -81,7 +87,7 @@ public class TestRunner {
 	public TestRunner() {
 		this.tests = new ArrayList<Test>();
 		this.size = N;
-		this.quantity = N-1;
+		this.quantity = N - 1;
 	}
 
 }

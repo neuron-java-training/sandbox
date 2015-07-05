@@ -6,6 +6,13 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
+/**
+ * Osztály a {@code Set} interfész {@code HashSet} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
 public class HashSetTest implements Test {
 	protected static final int DEFAULT_SIZE = 1000000;
 	protected Set<Integer> szamok;

@@ -3,7 +3,14 @@ package hu.neuron.java.kollekcio_projekt.app;
 import java.util.Random;
 import java.util.TreeMap;
 
-public class TreeMapTest extends HashMapTest{
+/**
+ * Osztály a {@code Map} interfész {@code TreeMap} implementációja
+ * teljesítményének vizsgálatához.
+ * 
+ * @author Norbert
+ * 
+ */
+public class TreeMapTest extends HashMapTest {
 
 	@Override
 	public void init() {
