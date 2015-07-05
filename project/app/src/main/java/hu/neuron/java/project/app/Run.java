@@ -4,10 +4,10 @@ import hu.neuron.java.project.core.IO;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import hu.neuron.java.project.app.*;
 public class Run {
 	List<Test> myList;
-	List<Result> myList2 = new ArrayList<Result>();
+	List<TestingResults> myList2 = new ArrayList<TestingResults>();
 
 	public Run() {
 
@@ -29,7 +29,7 @@ public class Run {
 		myList.add(new ArrayListTest());
 
 		for (Test test : this.myList) {
-			Result name = new Result();
+			TestingResults name = new TestingResults();
 			name.setCollectionName(test.getCollectionName());
 			name.setInitTime(test.init());
 			name.setDeleteTime(test.delete(1, 2));
@@ -38,7 +38,7 @@ public class Run {
 			myList2.add(name);
 		}
 		
-		for (Result myResult : myList2) {
+		for (TestingResults myResult : myList2) {
 			System.out.println(myResult);
 		}
 	}
