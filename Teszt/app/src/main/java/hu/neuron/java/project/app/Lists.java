@@ -1,9 +1,10 @@
 package hu.neuron.java.project.app;
 
-import hu.neuron.java.project.common.Result;
+import hu.neuron.java.project.common.IOInterface;
 import hu.neuron.java.project.core.IO;
 import hu.neuron.java.project.items.ComparableItem;
 import hu.neuron.java.project.items.ItemFactory;
+import hu.neuron.java.project.items.Result;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +26,6 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 		items = (List<ComparableItem>) ItemFactory.getItems2(t);
 		long end = System.currentTimeMillis();
 		res.setInit(end - start);
-
 	}
 
 	@Override
@@ -72,8 +72,8 @@ public class Lists<T extends List<ComparableItem>> implements Test, Runnable {
 		res.setName(items.getClass().getName());
 
 		// System.out.println(res.toString());
-		IO io = new IO();
-		io.write(res);
+		IOInterface io = new IO();
+		io.write(res.res());
 		// System.out.println(IO.readRes().toString());
 
 	}

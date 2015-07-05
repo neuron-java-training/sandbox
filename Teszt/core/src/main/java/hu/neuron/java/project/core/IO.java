@@ -4,7 +4,7 @@ package hu.neuron.java.project.core;
 
 
 import hu.neuron.java.project.common.IOInterface;
-import hu.neuron.java.project.common.Result;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,12 +19,12 @@ import java.util.Map;
 public class IO implements IOInterface {
 
 	@Override
-	public  void write(Result res) {
+	public  void write(String res) {
 		PrintWriter out = null;
 		try {
 			out = new PrintWriter(new FileWriter("res.txt", true));
-			System.out.println(res.res());
-			out.println(res.res());
+			System.out.println(res);
+			out.println(res);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

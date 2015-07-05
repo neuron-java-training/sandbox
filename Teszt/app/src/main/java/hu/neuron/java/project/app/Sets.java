@@ -1,9 +1,10 @@
 package hu.neuron.java.project.app;
+
 import hu.neuron.java.project.common.IOInterface;
-import hu.neuron.java.project.common.Result;
 import hu.neuron.java.project.core.IO;
 import hu.neuron.java.project.items.ComparableItem;
 import hu.neuron.java.project.items.ItemFactory;
+import hu.neuron.java.project.items.Result;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -68,7 +69,7 @@ public class Sets<T extends Set<ComparableItem>> implements Test, Runnable {
 
 		// System.out.println(res.toString());
 		IOInterface io = new IO();	
-		io.write(res);
+		io.write(res.res());
 		// System.out.println(IO.readRes().toString());
 
 	}

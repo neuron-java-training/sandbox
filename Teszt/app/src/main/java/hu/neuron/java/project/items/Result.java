@@ -1,4 +1,4 @@
-package hu.neuron.java.project.common;
+package hu.neuron.java.project.items;
 
 import java.io.Serializable;
 
