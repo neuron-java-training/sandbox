@@ -1,0 +1,1 @@
+java.util.ArrayList Fill: 71	Order: 159	Delete: 3;java.util.LinkedList Fill: 65	Order: 334	Delete: 0;java.util.ArrayDeque Fill: 66	Order: 608	Delete: 28;java.util.HashSet Fill: 4797	Order: 448	Delete: 339;java.util.TreeSet Fill: 254	Order: 0	Delete: 0;
