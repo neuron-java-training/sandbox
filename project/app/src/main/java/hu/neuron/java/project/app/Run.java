@@ -1,10 +1,13 @@
 package hu.neuron.java.project.app;
 
 import hu.neuron.java.project.core.IO;
+import hu.neuron.java.project.core.TestingResults;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import hu.neuron.java.project.app.*;
+@SuppressWarnings("unused")
 public class Run {
 	List<Test> myList;
 	List<TestingResults> myList2 = new ArrayList<TestingResults>();
@@ -18,9 +21,9 @@ public class Run {
 		// TODO Auto-generated method stub
 		Run myRun = new Run();
 		myRun.test();
-		IO myIO = new IO();
+		IO myIO = new IO(myRun.myList2);
 		//myIO.read("valami.txt", myRun.myList2);
-		myIO.write("valami2.txt", myRun.myList2);
+		myIO.write("valami2.txt" );
 	}
 
 	private void test() {

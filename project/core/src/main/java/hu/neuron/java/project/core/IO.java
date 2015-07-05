@@ -1,7 +1,7 @@
 package hu.neuron.java.project.core;
 
 import hu.neuron.java.common.IOinterface;
-import hu.neuron.java.project.app.TestingResults;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -14,9 +14,16 @@ import java.util.List;
 
 
 public class IO implements IOinterface {
-
+	List<TestingResults> myList;
 	
-	public void write(String name, List<TestingResults> myList) {
+	
+	public IO(List<hu.neuron.java.project.core.TestingResults> myList) {
+		super();
+		this.myList = myList;
+	}
+
+
+	public void write(String name) {
 		// TODO Auto-generated method stub
 
 		DataOutputStream out = null;
@@ -45,13 +52,10 @@ public class IO implements IOinterface {
 	}
 
 	
-	public void delete(String name) {
-		// TODO Auto-generated method stub
-
-	}
+	
 
 	
-	public void read(String name, List<TestingResults> myList) {
+	public void read(String name) {
 		// TODO Auto-generated method stub
 		DataInputStream in = null;
 		try {
