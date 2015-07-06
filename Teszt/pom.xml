@@ -12,6 +12,14 @@
 		<module>common</module>
 		<module>app</module>
 	</modules>
+	
+	
+	<distributionManagement>
+		<site>
+		<id>http://192.168.1.23/</id>
+		<url>file:\\192.168.1.23\www\TothDavid\${project.name}\${project.version}\</url>
+		</site>
+	</distributionManagement>
 
 
 	<dependencyManagement>
