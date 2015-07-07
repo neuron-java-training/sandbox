@@ -1,11 +1,8 @@
-package hu.neuron.java.project.online;
+package hu.neuron.java.project.app.tester;
 
 import hu.neuron.java.project.app.lists.GenericListTester;
 import hu.neuron.java.project.app.map.GenericMapTester;
 import hu.neuron.java.project.app.sets.GenericSetTester;
-import hu.neuron.java.project.app.tester.CallableResultGenerator;
-import hu.neuron.java.project.app.tester.Test;
-import hu.neuron.java.project.app.tester.TestObject;
 import hu.neuron.java.project.common.interfaces.Writer;
 import hu.neuron.java.project.core.FileWriter;
 import hu.neuron.java.project.core.TestResult;
