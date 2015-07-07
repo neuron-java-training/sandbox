@@ -110,7 +110,7 @@ public class GenericTestRunner {
 			}
 		}
 		
-		writer = new FileWriter(results);
+		writer = new FileWriter(results,"results.txt");
 		writer.write();
 
 	}

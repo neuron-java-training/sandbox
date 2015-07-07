@@ -9,15 +9,17 @@ public class FileWriter implements Writer {
 
 	private java.io.FileWriter fw;
 	private List<TestResult> results;
+	private String pathAndFileName;
 
-	public FileWriter(List<TestResult> tr) {
+	public FileWriter(List<TestResult> tr, String name) {
 		results = tr;
+		pathAndFileName = name;
 	}
 
 	public void write() {
 		String enter = System.getProperty("line.separator");
 		try {
-			fw = new java.io.FileWriter("results.txt", true);
+			fw = new java.io.FileWriter(pathAndFileName, true);
 			for (TestResult testResult : results) {
 				fw.write("---" + enter);
 				fw.write(testResult.getCollectionName() + enter);

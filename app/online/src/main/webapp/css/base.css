@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+#data , .dataTables_wrapper{
+	max-width: 1000px;
+	margin: 0px auto;
+}
+h2 , form{
+	text-align: center;
+}
+
+form, input#run{
+	margin-top: 15px;
+	font-size: 22px;
+}

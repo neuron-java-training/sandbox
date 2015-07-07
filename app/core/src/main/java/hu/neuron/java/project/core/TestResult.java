@@ -1,7 +1,13 @@
 package hu.neuron.java.project.core;
 
-public class TestResult implements Comparable<TestResult>{
+import java.io.Serializable;
+
+public class TestResult implements Comparable<TestResult>, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final double VIEWRATIO = 100_000;
 	private long initTime;
 	private long fillTime;
@@ -10,6 +16,8 @@ public class TestResult implements Comparable<TestResult>{
 	private long deletionTime;
 	private long duplicateEliminationTime;
 	private String collectionName;
+	
+	public TestResult(){}
 	
 	public TestResult(String name){
 		collectionName = name;
@@ -70,6 +78,10 @@ public class TestResult implements Comparable<TestResult>{
 	public String getCollectionName(){
 		return collectionName;
 	}
+	
+	public void setCollectionName(String collectionName) {
+		this.collectionName = collectionName;
+	}
 
 	public void display() {
 		System.out.println("Collection: " + collectionName);
@@ -88,22 +100,4 @@ public class TestResult implements Comparable<TestResult>{
 	public int compareTo(TestResult o) {
 		return ((Double)getAverageScore()).compareTo(o.getAverageScore());
 	}
-	
-	/*public synchronized void write(){
-		String enter = System.getProperty("line.separator");
-			try {
-				fw = new FileWriter("results.txt",true);
-				fw.write("---" + enter);
-				fw.write(collectionName + enter);
-				fw.write((initTime/VIEWRATIO) + enter);
-				fw.write((fillTime / VIEWRATIO) + enter);
-				fw.write((sortTime / VIEWRATIO) + enter);
-				fw.write((accessTime / VIEWRATIO) + enter);
-				fw.write((deletionTime / VIEWRATIO) + enter);
-				fw.write((duplicateEliminationTime / VIEWRATIO) + enter);
-				fw.flush();
-				fw.close();
-			} catch (IOException e) {
-			}
-	}*/
 }
