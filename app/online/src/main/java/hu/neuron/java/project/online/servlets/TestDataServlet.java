@@ -1,7 +1,7 @@
 package hu.neuron.java.project.online.servlets;
 
-import hu.neuron.java.project.app.tester.WebTestRunner;
 import hu.neuron.java.project.core.WebProcessor;
+import hu.neuron.java.project.online.WebTestRunner;
 
 import java.io.IOException;
 import java.io.InputStream;
