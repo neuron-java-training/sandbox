@@ -6,8 +6,8 @@ import app.collection_element.CollectionElement;
 
 public class LinkedHashSetTester extends SetTester{
 
-	public LinkedHashSetTester() {
-		super(new LinkedHashSet<CollectionElement>());
+	public LinkedHashSetTester(int initSize, int testSize) {
+		super(new LinkedHashSet<CollectionElement>(), initSize, testSize);
 	}
 
 	

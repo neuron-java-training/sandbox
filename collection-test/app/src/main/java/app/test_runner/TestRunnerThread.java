@@ -26,9 +26,9 @@ public class TestRunnerThread implements Callable<TestResult>{
 	}
 	
 	private void runTheTest(){
-		this.result.setInitTime(tester.init(Tester.LIST_SIZE));
-		this.result.setAccessTime(tester.get(Tester.TEST_SIZE));
-		this.result.setDeleteTime(tester.delete(Tester.TEST_SIZE));
+		this.result.setInitTime(tester.init());
+		this.result.setAccessTime(tester.get());
+		this.result.setDeleteTime(tester.delete());
 		try {
 			this.result.setSortTime(tester.sort());
 		} catch (UnsupportedOperationException ex) {

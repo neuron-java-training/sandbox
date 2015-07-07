@@ -1,45 +1,52 @@
 package app.set_test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 import app.collection_element.CollectionElement;
 import app.collection_element.CollectionElementFactory;
+
 import common.collection_test.Tester;
 
 public class SetTester extends Tester {
 
-	public static final int NON_RANDOM_INIT = 20;
+//	public static final int NON_RANDOM_INIT = 20;
+	
+	private int nonRandomInit;
 
 	protected Set<CollectionElement> set = null;
 	private List<CollectionElement> cElements = null;
 	private CollectionElementFactory factory = null;
 
-	public SetTester(Set<CollectionElement> set) {
-		super();
+	public SetTester(Set<CollectionElement> set, int initSize, int testSize) {
+		super(initSize, testSize);
 		this.set = set;
 		this.cElements = new ArrayList<>();
 		this.factory = new CollectionElementFactory();
+		this.nonRandomInit = testSize;
 	}
 
 	@Override
-	public long init(int size) {
-		int realSize = size - NON_RANDOM_INIT;
+	public long init() {
+		int realSize = super.initSize - nonRandomInit;
 
-		for (int i = 0; i < NON_RANDOM_INIT; i++) {
+		for (int i = 0; i < nonRandomInit; i++) {
 			cElements.add(factory.getRandomCollectionElement());
 		}
 
-		Date start = new Date();
+		long start = System.nanoTime();
 
+		for(int i = 0; i< nonRandomInit; i++){
+			set.add(cElements.get(i));
+		}
+		
 		for (int i = 0; i < realSize; i++) {
 			set.add(factory.getRandomCollectionElement());
 		}
 
-		Date end = new Date();
-		return end.getTime() - start.getTime();
+		long end = System.nanoTime();
+		return end - start;
 	}
 
 	@Override
@@ -48,11 +55,11 @@ public class SetTester extends Tester {
 	}
 
 	@Override
-	public long get(int count) {
-		int realSize = count - NON_RANDOM_INIT;
+	public long get() {
+		int realSize = super.testSize - nonRandomInit;
 
-		Date start = new Date();		
-		for (int i = 0; i < NON_RANDOM_INIT; i++) {
+		long start = System.nanoTime();	
+		for (int i = 0; i < nonRandomInit; i++) {
 			set.contains(cElements.get(i));
 		}
 
@@ -60,17 +67,17 @@ public class SetTester extends Tester {
 			set.contains(factory.getRandomCollectionElement());
 		}
 
-		Date end = new Date();
-		return end.getTime() - start.getTime();
+		long end = System.nanoTime();
+		return end - start;
 	}
 
 	@Override
-	public long delete(int count) {
-		int realCount = count - NON_RANDOM_INIT;
+	public long delete() {
+		int realCount = super.testSize - nonRandomInit;
 
-		Date start = new Date();
+		long start = System.nanoTime();
 
-		for (int i = 0; i < NON_RANDOM_INIT; i++) {
+		for (int i = 0; i < nonRandomInit; i++) {
 			set.remove(cElements.get(i));
 		}
 
@@ -78,8 +85,8 @@ public class SetTester extends Tester {
 			set.remove(factory.getRandomCollectionElement());
 		}
 
-		Date end = new Date();
-		return end.getTime() - start.getTime();
+		long end = System.nanoTime();
+		return end - start;
 	}
 
 	@Override

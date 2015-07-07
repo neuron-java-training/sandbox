@@ -6,8 +6,8 @@ import app.collection_element.CollectionElement;
 
 public class LinkedListTester extends ListTester{
 
-	public LinkedListTester() {
-		super(new LinkedList<CollectionElement>());
+	public LinkedListTester(int initSize, int testSize) {
+		super(new LinkedList<CollectionElement>(), initSize, testSize);
 	}
 
 	

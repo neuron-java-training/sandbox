@@ -6,7 +6,7 @@ import app.collection_element.CollectionElement;
 
 public class TreeSetTester extends SetTester{
 
-	public TreeSetTester() {
-		super(new TreeSet<CollectionElement>());
+	public TreeSetTester(int initSize, int testSize) {
+		super(new TreeSet<CollectionElement>(), initSize, testSize);
 	}	
 }
