@@ -23,7 +23,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#myTable').DataTable({
+		$('#roli').DataTable({
 			paging : true,
 			scrollY : 400,
 		});
@@ -31,33 +31,33 @@
 </script>
 <body>
 
-	<h1>salalalalal</h1>
-	<table id="myTable" style="width: 100%">
+	<h1>Test results</h1>
 
-		<%-- 		<c:forEach var="result" items="${sessionScope.resultlist}"> --%>
-		<!-- 		<tr> -->
-		<%-- 			<td>${result.initTime}</td> --%>
-		<%-- 			<td>${result.clazzName}</td> --%>
-		<!-- 		</tr> -->
-		<%-- 		</c:forEach> --%>
+	<table id="roli" class="display" cellspacing="0" width="100%">
+		<thead>
+			<tr>
+				<th>initTime</th>
+				<th>className</th>
 
-		<tr>
-			<td>Jill</td>
-			<td>Smith</td>
-			<td>50</td>
-		</tr>
-		<tr>
-			<td>Eve</td>
-			<td>Jackson</td>
-			<td>94</td>
-		</tr>
-		<tr>
-			<td>John</td>
-			<td>Doe</td>
-			<td>80</td>
-		</tr>
-	</table>
+			</tr>
+		</thead>
 
+		<tfoot>
+			<tr>
+				<th>initTime</th>
+				<th>className</th>
+
+			</tr>
+		</tfoot>
+
+		<tbody>
+			<c:forEach var="result" items="${sessionScope.resultlist}">
+			<tr>
+				<td>${result.initTime}</td>
+				<td>${result.clazzName}</td>
+			</tr>
+			</c:forEach>
+		</tbody>
 	</table>
 </body>
 </html>
