@@ -1,0 +1,3 @@
+listTest ->|initTime-> 0.262639 ms|sortingTime-> 3.446968 ms|getItemTime-> 3.473093 ms|deleteItemsByRangeTime-> 0.011663 ms|duplicationClearTime-> 0.758529 ms|
+treeTest ->|initTime-> 0.363404 ms|sortingTime-> 0.001866 ms|getItemTime-> 2.785004 ms|deleteItemsByRangeTime-> 0.339146 ms|duplicationClearTime-> 0.001866 ms|
+arrayTest ->|initTime-> 0.084903 ms|sortingTime-> 0.336813 ms|getItemTime-> 4.58896 ms|deleteItemsByRangeTime-> 0.006531 ms|duplicationClearTime-> 0.136218 ms|

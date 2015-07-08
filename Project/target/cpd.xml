@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd>
+   <duplication lines="43" tokens="224">
+      <file line="12"
+            path="D:\JavaProjectsEE\Project\App\src\main\java\hu\neuron\java\project\app\TestRunnerMain.java"/>
+      <file line="10"
+            path="D:\JavaProjectsEE\Project\App\src\main\java\hu\neuron\java\project\app\TestRunnerWeb.java"/>
+      <codefragment><![CDATA[	public static void main(String[] args) {
+		// TODO Auto-generated method stub		
+		boolean fileCheck = true;
+		int fileCounter = 0;
+
+		if(!new File("result").exists()){
+			new File("result").mkdir();
+		}
+		while (fileCheck) {
+			if (!new File("result//test" + fileCounter + "result.txt").isFile()) {
+				fileCheck = false;
+			} else {
+				fileCounter++;
+			}
+		}		
+
+		TestLinkedList listTest = new TestLinkedList();
+		TestThread<TestLinkedList> listTestRunnable = new TestThread<TestLinkedList>(listTest,
+				"listTest", fileCounter);
+		Thread listTestThread = new Thread(listTestRunnable);
+
+		TestArrayList arrayTest = new TestArrayList();
+		TestThread<TestArrayList> arrayTestRunnable = new TestThread<TestArrayList>(arrayTest,
+				"arrayTest", fileCounter);
+		Thread arrayTestThread = new Thread(arrayTestRunnable);
+
+		TestTreeSet treeTest = new TestTreeSet();
+		TestThread<TestTreeSet> treeTestRunnable = new TestThread<TestTreeSet>(treeTest,
+				"treeTest", fileCounter);
+		Thread treeTestThread = new Thread(treeTestRunnable);
+
+		listTestThread.start();
+		arrayTestThread.start();
+		treeTestThread.start();
+
+		while (listTestThread.isAlive() || arrayTestThread.isAlive() || treeTestThread.isAlive()) {
+			try {
+				Thread.sleep(200);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}]]></codefragment>
+   </duplication>
+</pmd-cpd>
