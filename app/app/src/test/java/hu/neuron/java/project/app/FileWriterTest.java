@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class FileWriterTest {
 	
     private static ArrayList<TestResult> results = new ArrayList<>();

@@ -37,9 +37,16 @@ public class TestDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
-
+		
+		if(request.isUserInRole("admin")){
+			request.getRequestDispatcher("/secured/admin/admin.jsp").forward(request, response);
+		}
+		else if(request.isUserInRole("user")){
+			request.getRequestDispatcher("/secured/user.jsp").forward(request, response);
+		}
+		else{
+			request.getRequestDispatcher("/index.jsp").forward(request, response);
+		}
 	}
 
 	/**

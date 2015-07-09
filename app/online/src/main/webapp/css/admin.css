@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+p{
+	font-size: 28px;
+}
+#data , .dataTables_wrapper{
+	max-width: 1000px;
+	margin: 0px auto;
+}
+h2 , form, p{
+	text-align: center;
+}
+
+form, input#run{
+	margin-top: 15px;
+	font-size: 22px;
+}
+
+input#load{
+	margin-top: 30px;
+	font-size: 18px;
+}

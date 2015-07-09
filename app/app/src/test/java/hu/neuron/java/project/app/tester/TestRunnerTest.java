@@ -1,8 +1,6 @@
 package hu.neuron.java.project.app.tester;
 
 import static org.junit.Assert.*;
-import hu.neuron.java.project.app.App;
-
 import org.junit.Test;
 
 public class TestRunnerTest {
