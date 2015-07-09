@@ -11,3 +11,8 @@ form, input#run{
 	margin-top: 15px;
 	font-size: 22px;
 }
+
+input#load{
+	margin-top: 30px;
+	font-size: 18px;
+}

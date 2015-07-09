@@ -120,9 +120,4 @@ public class WebTestRunner {
 
 	}
 
-	public void run(String name) {
-		WebTestRunner runner = new WebTestRunner(name);
-		runner.runTests();
-	}
-
 }

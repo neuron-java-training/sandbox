@@ -10,7 +10,7 @@
 		type="text/css" media="screen" />
 	<link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css"
 	type="text/css" media="screen" />
-	<link rel="stylesheet" href="/css/base.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="css/base.css" type="text/css" media="screen" />
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript" src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" 

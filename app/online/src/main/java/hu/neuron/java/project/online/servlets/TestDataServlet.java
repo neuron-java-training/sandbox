@@ -1,7 +1,8 @@
 package hu.neuron.java.project.online.servlets;
 
 import hu.neuron.java.project.app.tester.WebTestRunner;
-import hu.neuron.java.project.core.WebProcessor;
+import hu.neuron.java.project.core.BeanProcessor;
+import hu.neuron.java.project.core.TableBean;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/TestData")
 public class TestDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static volatile boolean processed = false;
+	private static BeanProcessor beanProcessor;
 	private static WebTestRunner tester;
 
 	/**
@@ -47,39 +48,44 @@ public class TestDataServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String s = request.getParameter("test");
-		if(s.equals("Go")){
+		
+		TableBean tb = (TableBean) request.getSession().getAttribute("table");
+		String g = request.getParameter("test");
+		if(g != null && g.equals("Go")){
 			tester.runTests();
-			processed=false;
-			process();
+			tb = generateTable();
+			request.getSession().setAttribute("table", tb);
+		}
+		else{
+			String s = request.getParameter("load");
+			if(s != null && s.equals("Load results")){
+				tb = generateTable();
+				request.getSession().setAttribute("table", tb);
+			}
 		}
 		doGet(request,response);
 	}
 
 	@Override
 	public void init() {
-		if (!processed) {
-			process();
-			// System.out.println("lefutott az initben");
-		}
-		tester = new WebTestRunner(getPath()+"WEB-INF/results.txt");
-	}
-
-	private void process() {
-		String enter = System.getProperty("line.separator");
-		ServletContext sc = getServletContext();
-		InputStream is = sc.getResourceAsStream("/WEB-INF/results.txt");
-		Scanner scr = new Scanner(is).useDelimiter("\\" + enter);
-		WebProcessor wp = new WebProcessor(scr, getPath());
-		wp.process();
-		processed = true;
+		tester = new WebTestRunner(getPath(getServletContext())+"WEB-INF/results.txt");
 	}
 	
-	private String getPath(){
-		ServletContext sc = getServletContext();
+	private String getPath(ServletContext sc){
 		String path = sc.getRealPath("/index.html");
 		String result = path.substring(0, path.indexOf("index.html"));
 		return result;
+	}
+	
+	private TableBean generateTable(){
+		
+		ServletContext sc = getServletContext();
+		String enter = System.getProperty("line.separator");
+		InputStream is = sc.getResourceAsStream("/WEB-INF/results.txt");
+		Scanner scr = new Scanner(is).useDelimiter("\\" + enter);
+		beanProcessor = new BeanProcessor(scr);
+		
+		return beanProcessor.generateBean();
 	}
 
 }
