@@ -31,22 +31,30 @@
 	<div style="width: 40%">
 		<form action="CollectionTestServlet" method="post">
 
-			<table>
-				<tr>
-					<td>Init size:</td>
-					<td><input type="text" name="initSize"></td>
-				</tr>
-				<tr>
-					<td>Test size:</td>
-					<td><input type="text" name="testSize"></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button id="button" value="run" type="submit" name="operator" onclick="setDisable(this);">Run test</button>
-					</td>
-				</tr>
-			</table>
-			
+			<c:choose>
+				<c:when test="${pageContext.request.isUserInRole('manager')}">
+					<table>
+						<tr>
+							<td>Init size:</td>
+							<td><input type="text" name="initSize"></td>
+						</tr>
+						<tr>
+							<td>Test size:</td>
+							<td><input type="text" name="testSize"></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button id="button" value="run" type="submit" name="operator" onclick="setDisable(this);">Run test</button>
+							</td>
+						</tr>
+					</table>
+				</c:when>
+				<c:when test=${pageContext.request.isUserInRole('user')}">
+					<p>Some content here</p>
+				</c:when>
+			</c:choose>
+
+
 			<table id="table">
 				<thead>
 					<tr>

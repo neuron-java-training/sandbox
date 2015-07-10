@@ -13,23 +13,11 @@
 <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.js"></script>
 
-<script>
-	$(document).ready(function() {
-		// DataTable
-		var table = $('#table').DataTable();
-	});
-	
-	function setDisable(btn) {
-		//$("#button").attr("disabled", true);
-		btn.form.submit();
-		btn.disabled = true;
-	}
-</script>
 
 </head>
 <body>
 		<form action="CollectionTestServlet" method="post">
-			<button value="run" type="submit" name="operator" onclick="setDisable(this);">Run test</button>
+			<a href="collectionTest.jsp" >CollectionTest</a>
 		</form>
 </body>
 </html>

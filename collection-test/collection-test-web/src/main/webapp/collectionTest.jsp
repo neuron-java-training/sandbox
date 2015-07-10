@@ -7,73 +7,145 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.css">
-<script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.js"></script>
+<jsp:include page="header.jsp"></jsp:include>
+<script src="resources/datatable/js/jquery.dataTables.js"></script>
+<link href="resources/datatable/css/jquery.dataTables_themeroller.css" rel="stylesheet">
+</head>
+
+<style>
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background: rgba(255, 255, 255, .8)
+		url('resources/images/ajax-loader.gif') 50% 50% no-repeat;
+}
+
+body.loading {
+	overflow: hidden;
+}
+
+body.loading .modal {
+	display: block;
+}
+
+#tableContainer {
+	position: absolute;
+	width: 70%;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+</style>
 
 <script>
-	$(document).ready(function() {
-		// DataTable
-		var table = $('#table').DataTable();
-	});
-
-	function setDisable(btn) {
-		//$("#button").attr("disabled", true);
-		btn.form.submit();
-		btn.disabled = true;
+	function showLoading() {
+		$("body").addClass("loading");
 	}
+
+	function hideLoading() {
+		$("body").removeClass("loading");
+	}
+
+	function create() {
+		console.log("Create");
+		$('#table').dataTable({
+			"bJQueryUI" : true,
+			"ajax" : "CollectionTestServlet?op=get",
+
+			"aoColumns" : [ {
+				"data" : "testName"
+			}, {
+				"data" : "initTime"
+			}, {
+				"data" : "accessTime"
+			}, {
+				"data" : "deleteTime"
+			}, {
+				"data" : "sortTime"
+			} ]
+		});
+	}
+
+	$(document).ready(function() {
+		console.log("ready");
+		create();
+
+		$("#button").click(function(event) {
+			console.log("onclick");
+			$("#button").attr("disabled", true);
+			showLoading();
+
+			$.ajax({
+				url : 'CollectionTestServlet',
+				data : {
+					op : 'run',
+					initSize : $('#initSize').val(),
+					testSize : $('#testSize').val()
+				},
+				success : function(data) {
+					console.log(data);
+					$('#table').dataTable().fnDestroy();
+					create();
+					$("button").attr("disabled", false);
+					hideLoading();
+				},
+				dataType : "html"
+			});
+
+		});
+
+	});
 </script>
 
 </head>
 <body>
-	<div style="width: 40%">
+	<div>
 		<form action="CollectionTestServlet" method="post">
 
-			<table>
-				<tr>
-					<td>Init size:</td>
-					<td><input type="text" name="initSize"></td>
-				</tr>
-				<tr>
-					<td>Test size:</td>
-					<td><input type="text" name="testSize"></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<button id="button" value="run" type="submit" name="operator" onclick="setDisable(this);">Run test</button>
-					</td>
-				</tr>
-			</table>
-			
-			<table id="table">
-				<thead>
-					<tr>
-						<th>Test</th>
-						<th>Init</th>
-						<th>Access</th>
-						<th>Delete</th>
-						<th>Sort</th>
-					</tr>
-				</thead>
-				<c:forEach items="${sessionScope.resultSession}" var="result">
-					<tr>
-						<td><c:out value="${result.testName}"></c:out></td>
+			<c:choose>
+				<c:when test="${pageContext.request.isUserInRole('manager')}">
+					<table>
+						<tr>
+							<td>Init size:</td>
+							<td><input id="initSize" type="text" name="initSize"></td>
+						</tr>
+						<tr>
+							<td>Test size:</td>
+							<td><input id="testSize" type="text" name="testSize"></td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button id="button" value="run" type="button" name="operator">Run test</button>
+							</td>
+						</tr>
+					</table>
+				</c:when>
+			</c:choose>
 
-						<td><c:out value="${result.initTime}"></c:out></td>
+			<div id="tableContainer">
+				<table id="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Init</th>
+							<th>Access</th>
+							<th>Delete</th>
+							<th>Sort</th>
+						</tr>
+					</thead>
 
-						<td><c:out value="${result.accessTime}"></c:out></td>
+				</table>
+			</div>
 
-						<td><c:out value="${result.deleteTime}"></c:out></td>
-
-						<td><c:out value="${result.sortTime}"></c:out></td>
-					</tr>
-				</c:forEach>
-
-			</table>
 		</form>
 	</div>
-
+	<div class="modal"></div>
 </body>
+
 </html>
