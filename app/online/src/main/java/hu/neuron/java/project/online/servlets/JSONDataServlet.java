@@ -15,11 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 /**
  * Servlet implementation class TestDataServlet
  */
-@WebServlet("/TestData")
-public class TestDataServlet extends HttpServlet {
+@WebServlet("/JSONDataServlet")
+public class JSONDataServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static BeanProcessor beanProcessor;
 	private static WebTestRunner tester;
@@ -27,7 +29,7 @@ public class TestDataServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public TestDataServlet() {
+	public JSONDataServlet() {
 		super();
 	}
 
@@ -37,16 +39,6 @@ public class TestDataServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		if(request.isUserInRole("admin")){
-			request.getRequestDispatcher("/secured/admin/admin.jsp").forward(request, response);
-		}
-		else if(request.isUserInRole("user")){
-			request.getRequestDispatcher("/secured/ajaxuser.jsp").forward(request, response);
-		}
-		else{
-			request.getRequestDispatcher("/index.jsp").forward(request, response);
-		}
 	}
 
 	/**
@@ -56,21 +48,23 @@ public class TestDataServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		TableBean tb = (TableBean) request.getSession().getAttribute("table");
 		String g = request.getParameter("test");
+		Gson gson = new Gson();
 		if(g != null && g.equals("Go")){
 			tester.runTests();
-			tb = generateTable();
-			request.getSession().setAttribute("table", tb);
+			TableBean tb = generateTable();
+			gson.toJson(tb, response.getWriter());
 		}
 		else{
 			String s = request.getParameter("load");
 			if(s != null && s.equals("Load results")){
-				tb = generateTable();
-				request.getSession().setAttribute("table", tb);
+				TableBean tb = generateTable();
+				gson.toJson(tb, response.getWriter());
 			}
 		}
-		doGet(request,response);
+		TableBean tb = generateTable();
+		gson.toJson(tb, response.getWriter());
+		//doGet(request,response);
 	}
 
 	@Override
