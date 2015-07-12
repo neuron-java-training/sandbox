@@ -48,7 +48,7 @@ public class AppTest
 
 		testrunner.order();
 
-		io.write(TestRunner.testresults);
+		io.write(TestRunner.getTestresults());
 
 		System.out.println(TestRunner.INITNUMBER + " variable "
 				+ "average init() time, with:\n");

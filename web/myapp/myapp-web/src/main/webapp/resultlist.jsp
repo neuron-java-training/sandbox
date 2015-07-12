@@ -36,7 +36,7 @@
 	<table id="roli" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th>initTime</th>
+				<th>initTime (milisec)</th>
 				<th>className</th>
 
 			</tr>
@@ -52,12 +52,30 @@
 
 		<tbody>
 			<c:forEach var="result" items="${sessionScope.resultlist}">
-			<tr>
-				<td>${result.initTime}</td>
-				<td>${result.clazzName}</td>
-			</tr>
+				<tr>
+					<td>${result.initTime}</td>
+					<td>${result.clazzName}</td>
+				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<form action="DataFactoryServlet" method="post">
+		<table>
+			<thead>
+				<tr>
+					<th>New test run</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td><button type="submit" name="operator" value="run"
+							style="width: 100px; height: 50px;">Run</button></td>
+				</tr>
+			</tfoot>
+
+		</table>
+	</form>
+
+
 </body>
 </html>

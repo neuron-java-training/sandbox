@@ -1,5 +1,8 @@
+<%-- <%@ page import="hu.neuron.java.servlet.DataFactoryServlet"%> --%>
+
 <html>
-<body>
-<h2>Hello World!</h2>
+<ul>
+	<li><a href="resultlist.jsp">Test</a></li>
+</ul>
 </body>
 </html>

@@ -10,11 +10,11 @@ import java.util.Random;
 public class TestRunner implements Test<Collection<Items>> {
 	protected static final int TESTSNUMBER = 5;
 	protected static final long INITNUMBER = 3000000;
-	protected static List<TestResults> testresults = new ArrayList<>();
+	private static List<TestResults> testresults = new ArrayList<>();
 
 	@Override
 	public void order() {
-		Collections.sort(testresults, new Comparator<TestResults>() {
+		Collections.sort(getTestresults(), new Comparator<TestResults>() {
 
 			@Override
 			public int compare(TestResults o1, TestResults o2) {
@@ -28,9 +28,9 @@ public class TestRunner implements Test<Collection<Items>> {
 
 	@Override
 	public void getElement(String index) {
-		for (int i = 0; i < testresults.size(); i++) {
-			if (testresults.get(i).getClazzName().equals(index)) {
-				System.out.println(testresults.get(i));
+		for (int i = 0; i < getTestresults().size(); i++) {
+			if (getTestresults().get(i).getClazzName().equals(index)) {
+				System.out.println(getTestresults().get(i));
 			}
 		}
 	}
@@ -38,7 +38,7 @@ public class TestRunner implements Test<Collection<Items>> {
 	@Override
 	public void delete(int a, int b) {
 		for (int i = a; i <= b; i++) {
-			testresults.remove(i);
+			getTestresults().remove(i);
 		}
 	}
 
@@ -54,8 +54,16 @@ public class TestRunner implements Test<Collection<Items>> {
 
 	public void isBest() {
 		order();
-		System.out.println(testresults.get(0));
+		System.out.println(getTestresults().get(0));
 
+	}
+
+	public static List<TestResults> getTestresults() {
+		return testresults;
+	}
+
+	public static void setTestresults(List<TestResults> testresults) {
+		TestRunner.testresults = testresults;
 	}
 
 }

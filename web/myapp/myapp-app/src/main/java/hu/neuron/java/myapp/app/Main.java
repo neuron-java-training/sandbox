@@ -17,7 +17,7 @@ public class Main {
 		testrunner.order();
 
 		
-		return TestRunner.testresults;
+		return TestRunner.getTestresults();
 		
 	}
 }

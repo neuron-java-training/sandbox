@@ -29,7 +29,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.ArrayList"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 
 		t = new LinkedList<>();
 
@@ -41,7 +41,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.LinkedList"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 	}
 	
 	public static void doSetTest() {
@@ -59,7 +59,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.HashSet"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 
 		sethelp = new TreeSet<>();
 
@@ -71,7 +71,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.TreeSet"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 	}
 	
 	public static void doDequeTest(){
@@ -89,7 +89,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.ArrayDeque"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 		
 	}
 	
@@ -108,7 +108,7 @@ public class Tester {
 		adder = new TestResults(Integer.valueOf(String.valueOf(diff)),
 				new String("java.util.PriorityQueue"));
 
-		TestRunner.testresults.add(adder);
+		TestRunner.getTestresults().add(adder);
 		
 	}
 
