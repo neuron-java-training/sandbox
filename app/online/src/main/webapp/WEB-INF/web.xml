@@ -36,7 +36,7 @@
 	
 	<login-config>
 		<auth-method>FORM</auth-method>
-		<realm-name>CustomRealm</realm-name>
+		<realm-name>UserDatabase</realm-name>
 		<form-login-config>
 			<form-login-page>/public/login.jsp</form-login-page>
 			<form-error-page>/public/login.jsp?error=true</form-error-page>
@@ -64,4 +64,11 @@
 		</cookie-config>
 		<tracking-mode>COOKIE</tracking-mode> 
 	</session-config>
+	
+	 <resource-ref>
+      <description>DB Connection</description>
+      <res-ref-name>jdbc/TestDB</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+  </resource-ref>
 </web-app>

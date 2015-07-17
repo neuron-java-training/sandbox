@@ -3,6 +3,6 @@
 type="text/css" media="screen" />	
 <ul>
 	<li><a href="<%=request.getContextPath()%>/secured/ajaxuser.jsp">User</a></li>
-	<li><a href="<%=request.getContextPath()%>/secured/admin/admin.jsp">Admin</a></li>
+	<li><a href="<%=request.getContextPath()%>/secured/admin/ajaxadmin.jsp">Admin</a></li>
 	<li><a href="/online/LogOutServlet">LogOut</a></li>
 </ul>

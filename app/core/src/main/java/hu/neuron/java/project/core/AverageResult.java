@@ -2,17 +2,17 @@ package hu.neuron.java.project.core;
 
 public class AverageResult implements Comparable<AverageResult>{
 	
-	private long initTime = 0;
-	private long fillTime = 0;
-	private long sortTime = 0;
-	private long accessTime = 0;
-	private long deletionTime = 0;
-	private long duplicateEliminationTime = 0;
+	private double initTime = 0;
+	private double fillTime = 0;
+	private double sortTime = 0;
+	private double accessTime = 0;
+	private double deletionTime = 0;
+	private double duplicateEliminationTime = 0;
 	private String collectionName;
 	private int accessCounter = 0;
 	private int n = 0;
 
-	public long getAverageInitTime() {
+	public double getAverageInitTime() {
 		return initTime / n;
 	}
 
@@ -22,7 +22,7 @@ public class AverageResult implements Comparable<AverageResult>{
 		initTime += time;
 	}
 
-	public long getAverageFillTime() {
+	public double getAverageFillTime() {
 		return fillTime / n;
 	}
 
@@ -32,7 +32,7 @@ public class AverageResult implements Comparable<AverageResult>{
 		fillTime += time;
 	}
 
-	public long getAverageSortTime() {
+	public double getAverageSortTime() {
 		return sortTime / n;
 	}
 
@@ -42,7 +42,7 @@ public class AverageResult implements Comparable<AverageResult>{
 		sortTime += time;
 	}
 
-	public long getAverageAccessTime() {
+	public double getAverageAccessTime() {
 		return accessTime / n;
 	}
 
@@ -52,7 +52,7 @@ public class AverageResult implements Comparable<AverageResult>{
 		accessTime += time;
 	}
 
-	public long getAverageDeletionTime() {
+	public double getAverageDeletionTime() {
 		return deletionTime / n;
 	}
 
@@ -62,7 +62,7 @@ public class AverageResult implements Comparable<AverageResult>{
 		deletionTime += time;
 	}
 
-	public long getAverageDuplicateEliminationTime() {
+	public double getAverageDuplicateEliminationTime() {
 		return duplicateEliminationTime / n;
 	}
 

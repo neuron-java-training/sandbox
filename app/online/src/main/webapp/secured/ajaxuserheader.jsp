@@ -21,8 +21,18 @@
 				"ajax": {
 				    "url": "JSONDataServlet",
 				    "type": "POST",
-				    "dataSrc": "tableData"
-				  }
+				    "dataType" : "json"
+				  },
+				"columns": [
+				        { "data": "className" },
+				        { "data": "n" },
+				        { "data": "accessTime" },
+				        { "data": "deletionTime" },
+				        { "data": "duplicateTime" },
+				        { "data": "fillTime" },
+				        { "data": "initTime" },
+				        { "data": "sortTime" }
+				 ]
 			});
 		});
 	</script>

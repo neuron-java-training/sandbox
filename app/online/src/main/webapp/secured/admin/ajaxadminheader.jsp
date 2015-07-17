@@ -17,7 +17,41 @@
 	src="http://cdn.datatables.net/plug-ins/1.10.7/integration/jqueryui/dataTables.jqueryui.js"></script>
 	<script>
 		$(document).ready(function() {
-			$('#data').DataTable();
+			$('#data').DataTable({
+				"ajax": {
+				    "url": "SQLDataServlet",
+				    "type": "POST",
+				    "dataType" : "json"
+				  },
+				"columns": [
+				        { "data": "className" },
+				        { "data": "n" },
+				        { "data": "accessTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }},
+				        { "data": "deletionTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }},
+				        { "data": "duplicateTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }},
+				        { "data": "fillTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }},
+				        { "data": "initTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }},
+				        { "data": "sortTime",
+				        	"render": function ( data, type, full, meta ) {
+				        	      return parseFloat(parseFloat(data).toFixed(4)).toString();
+				        	    }}
+				 ]
+			});
 		});
 	</script>
 </head>

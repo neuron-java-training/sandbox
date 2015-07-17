@@ -8,7 +8,7 @@ public class TestResult implements Comparable<TestResult>, Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final double VIEWRATIO = 100_000;
+	public static final long VIEWRATIO = 100_000;
 	private long initTime;
 	private long fillTime;
 	private long sortTime;
