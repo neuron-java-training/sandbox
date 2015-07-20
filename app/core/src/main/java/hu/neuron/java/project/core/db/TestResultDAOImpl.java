@@ -7,100 +7,68 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class TestResultDAOImpl implements TestResultDAO {
 
-	private Connection connection;
-
-	public TestResultDAOImpl(Connection connection) {
-		this.connection = connection;
+	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public Long save(TestResult tr) {
-		Long rv = null;
-		PreparedStatement statement = null;
-		try {
-			String sql = "INSERT INTO results VALUES ( ?,?,?,?,?,?,?,? ) ";
-			statement = connection.prepareStatement(sql);
-			
-			statement.setInt(1, 0);
-			statement.setString(2, tr.getCollectionName());
-			statement.setLong(3, tr.getInitTime());
-			statement.setLong(4, tr.getFillTime());
-			statement.setLong(5, tr.getSortTime());
-			statement.setLong(6, tr.getAccessTime());
-			statement.setLong(7, tr.getDeletionTime());
-			statement.setLong(8, tr.getDuplicateEliminationTime());
-			statement.executeUpdate();
+	public Long save(final TestResult tr) {
 
-//			rs = statement.getgeneratedkeys();
-//
-//			if (rs.next()) {
-//				rv = rs.getlong(1);
-//			}
+		final String INSERT_SQL = "insert into results values(?,?,?,?,?,?,?,?)";
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			/*try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}*/
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTemplate.update(new PreparedStatementCreator() {
+			public PreparedStatement createPreparedStatement(
+					Connection connection) throws SQLException {
+				PreparedStatement ps = connection.prepareStatement(INSERT_SQL,
+						Statement.RETURN_GENERATED_KEYS);
+				ps.setLong(1, 0);
+				ps.setString(2, tr.getCollectionName());
+				ps.setLong(3, tr.getInitTime());
+				ps.setLong(4, tr.getFillTime());
+				ps.setLong(5, tr.getSortTime());
+				ps.setLong(6, tr.getAccessTime());
+				ps.setLong(7, tr.getDeletionTime());
+				ps.setLong(8, tr.getDuplicateEliminationTime());
+				return ps;
 			}
-		}
-		return rv;
+		}, keyHolder);
+		
+		return keyHolder.getKey().longValue();
 	}
 
 	@Override
 	public List<TestResultVO> readAll() {
-		ArrayList<TestResultVO> list = new ArrayList<>();
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		try {
+		return this.jdbcTemplate.query("select * from results",
+				new TestResultVOMapper());
+	}
+	
+	public static final class TestResultVOMapper implements RowMapper<TestResultVO> {
 
-			String sql = "select * from RESULTS";
-			statement = connection.prepareStatement(sql);
-			resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-				String name = resultSet.getString("name");
-				long init = resultSet.getLong("INIT");
-				long fill = resultSet.getLong("FILL");
-				long sort = resultSet.getLong("SORT");
-				long access = resultSet.getLong("ACCESS");
-				long delete = resultSet.getLong("DELETE");
-				long unduplicate = resultSet.getLong("UNDUPLICATE");
-				list.add(new TestResultVO(name,init,fill,sort,access,delete,unduplicate));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				resultSet.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				statement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			/*try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}*/
+		public TestResultVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			return new TestResultVO(rs.getString("name"),rs.getLong("init"),rs.getLong("fill"),
+					rs.getLong("sort"),rs.getLong("access"),rs.getLong("delete"),
+					rs.getLong("unduplicate"));
 		}
-		return list;
 	}
 
 }

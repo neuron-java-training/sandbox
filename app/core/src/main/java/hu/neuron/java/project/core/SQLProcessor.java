@@ -1,6 +1,5 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.db.DAOFactory;
 import hu.neuron.java.project.core.db.TestResultDAO;
 
 import java.util.ArrayList;
@@ -9,45 +8,26 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SQLProcessor {
 
+	@Autowired
+	private TestResultDAO dao;
+
 	public SQLProcessor() {
 	}
 
-	public List<WebVO>  generateVOs() {
+	public List<WebVO> generateVOs() {
 
 		LinkedList<String> names = new LinkedList<>();
 		List<TestResultVO> data = null;
-		
-		DAOFactory instance = DAOFactory.getInstance();
-		try {
-			instance.beginConnectionScope();
-			try {
-				instance.beginTransaction();
 
-				TestResultDAO dao = instance.getTestResultDAO();
+		data = dao.readAll();
 
-				data = dao.readAll();
-
-				instance.endTransaction();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				instance.abortTransaction();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				instance.endConnectionScope();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		for(TestResultVO trv: data){
+		for (TestResultVO trv : data) {
 			if (!names.contains(trv.getClassName())) {
 				names.add(trv.getClassName());
 			}
@@ -96,6 +76,6 @@ public class SQLProcessor {
 			list.add(vo);
 		}
 		return list;
-		
+
 	}
 }

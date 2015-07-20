@@ -39,11 +39,11 @@ public class SQLDataServlet extends HttpRequestHandlerServlet implements
 
 	protected void forward(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.isUserInRole("ROLE_ADMIN")){
+		if(request.isUserInRole("ADMIN")){
 			request.getRequestDispatcher("/secured/admin/ajaxadmin.jsp").forward(request, response);
 		}
-		else if(request.isUserInRole("user")){
-			request.getRequestDispatcher("/secured/ajaxuser.jsp").forward(request, response);
+		else if(request.isUserInRole("USER")){
+			request.getRequestDispatcher("/secured/user/ajaxuser.jsp").forward(request, response);
 		}
 		else{
 			request.getRequestDispatcher("/index.jsp").forward(request, response);

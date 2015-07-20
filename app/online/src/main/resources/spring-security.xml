@@ -8,9 +8,9 @@
 			error-page="/public/accessdenied.jsp" />
 		<security:csrf disabled="true" />
 		<security:headers disabled="true" />
-		<security:intercept-url pattern="/secured/"
+		<security:intercept-url pattern="/secured/user/*"
 			access="hasRole('USER')" />
-			<security:intercept-url pattern="/secured/admin/*"
+		<security:intercept-url pattern="/secured/admin/*"
 			access="hasRole('ADMIN')" />
 		<security:form-login login-page="/public/login.jsp"
 			login-processing-url="/login" default-target-url="/index.jsp"

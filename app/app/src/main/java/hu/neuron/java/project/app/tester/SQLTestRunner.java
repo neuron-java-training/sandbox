@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -28,6 +29,8 @@ public class SQLTestRunner {
 
 	public ArrayList<Test> tests;
 	public ArrayList<TestResult> results;
+	
+	@Autowired
 	private Writer writer;
 	
 	public SQLTestRunner(){}
@@ -115,7 +118,9 @@ public class SQLTestRunner {
 			}
 		}
 		
-		writer = new SQLWriter(results);
+		//TODO
+		//writer = new SQLWriter(results);
+		((SQLWriter)writer).setResults(results);
 		writer.write();
 
 	}
