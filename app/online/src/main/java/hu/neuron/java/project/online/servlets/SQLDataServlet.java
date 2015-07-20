@@ -9,40 +9,37 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.HttpConstraint;
-import javax.servlet.annotation.ServletSecurity;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestHandler;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
 
 import com.google.gson.Gson;
 
 /**
  * Servlet implementation class TestDataServlet
  */
-@WebServlet("/SQLDataServlet")
-@ServletSecurity(value=@HttpConstraint(rolesAllowed = {"user", "admin"}))
-public class SQLDataServlet extends HttpServlet {
+@Component("/SQLDataServlet")
+@WebServlet(name = "/SQLDataServlet", urlPatterns = "/SQLDataServlet")
+public class SQLDataServlet extends HttpRequestHandlerServlet implements
+	HttpRequestHandler {
+	
 	private static final long serialVersionUID = 1L;
-	private static SQLProcessor SQLProcessor;
-	private static SQLTestRunner tester;
+	
+	@Autowired
+	private  SQLProcessor SQLProcessor;
+	@Autowired
+	private  SQLTestRunner tester;
+	
 	private static List<WebVO> data;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public SQLDataServlet() {
-		super();
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void forward(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.isUserInRole("admin")){
+		if(request.isUserInRole("ROLE_ADMIN")){
 			request.getRequestDispatcher("/secured/admin/ajaxadmin.jsp").forward(request, response);
 		}
 		else if(request.isUserInRole("user")){
@@ -53,27 +50,23 @@ public class SQLDataServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	@Override
+	public void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		String g = request.getParameter("test");
 		if(g != null && g.equals("Go")){
 			
 			tester.runTests();
-			SQLProcessor = new SQLProcessor();
 			data = SQLProcessor.generateVOs();
-			doGet(request, response);
+			forward(request, response);
 		}
 		else {
 			String s = request.getParameter("load");
 			if(s != null && s.equals("Load results")){
 				
-				SQLProcessor = new SQLProcessor();
 				data = SQLProcessor.generateVOs();
-				doGet(request, response);
+				forward(request, response);
 			}
 			else{
 				Gson gson = new Gson();
@@ -82,10 +75,4 @@ public class SQLDataServlet extends HttpServlet {
 			}
 		}
 	}
-
-	@Override
-	public void init() {
-		tester = new SQLTestRunner();
-	}
-
 }

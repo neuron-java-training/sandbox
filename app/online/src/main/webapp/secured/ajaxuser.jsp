@@ -10,7 +10,7 @@
 </c:if>
 <c:choose>
 	<c:when test="${show == \"yes\"}">
-			<form action="/online/JSONDataServlet" method="post">
+			<form action="/online/SQLDataServlet" method="post">
 				<input type="submit" name="load" value="Load results" id="load">
 			</form>
 			<c:set var="show" scope="session" value="no"/>

@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html;"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<title>Login Page</title>
+<title>Registration Page</title>
 <style>
 .error {
 	padding: 15px;
@@ -42,14 +41,23 @@
 
 	<div id="login-box">
 
-		<h3>Login</h3>
+		<h3>Registration</h3>
 
-		<c:if test="${not empty param.error}">
-			<div class="error">Wrong password</div>
+		<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+			<script >
+				setTimeout(function() {
+					window.location.href = '<c:url value="/index.jsp" />';
+				}, 5000);
+			</script>
+
 		</c:if>
 
-		<c:url var="loginUrl" value="/login" />
-		<form action="${loginUrl}" method="post">
+		<form name="loginForm" action="<c:url value="/RegistrationServlet" />"
+			method="POST">
 
 			<table>
 				<tr>
@@ -60,18 +68,20 @@
 					<td>Password:</td>
 					<td><input type="password" name="password" /></td>
 				</tr>
+
 				<tr>
-					<td>Remember Me:</td>
-					<td><input type="checkbox" name="remember-me" /></td>
+					<td>Confirm password:</td>
+					<td><input type="password" name="password2" /></td>
 				</tr>
 				<tr>
-					<td><input name="submit" type="submit" value="Login" /></td>
+					<td colspan="2"><input name="submit" type="submit"
+						value="Registration" /></td>
+
 				</tr>
-				<tr>
-					<td><a href="<c:url value="/public/registration.jsp"/>">Registration</a></td>
-				</tr>
-				
 			</table>
+
+
+
 		</form>
 	</div>
 
