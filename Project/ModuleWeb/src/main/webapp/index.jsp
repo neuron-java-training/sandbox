@@ -17,8 +17,8 @@
 
 	<c:import url="/secured/admin/NewTestScript.jsp"></c:import>
 
-	<c:import url="/GetTestResultScript.jsp"></c:import>
-	<c:import url="/GetAvgTestResultScript.jsp"></c:import>
+<%--	<c:import url="/GetTestResultScript.jsp"></c:import> --%>
+<%--	<c:import url="/GetAvgTestResultScript.jsp"></c:import> --%>
 
 	<table id="table" hidden="true">
 		<thead>
