@@ -3,8 +3,8 @@ package hu.neuron.java.project.online;
 import hu.neuron.java.project.core.UserService;
 
 
-import hu.neuron.java.project.core.vo.RoleVO;
-import hu.neuron.java.project.core.vo.UserVO;
+import hu.neuron.java.project.core.entity.RoleVO;
+import hu.neuron.java.project.core.entity.UserVO;
 
 import java.util.ArrayList;
 import java.util.HashSet;

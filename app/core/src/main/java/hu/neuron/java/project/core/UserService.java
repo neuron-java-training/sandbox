@@ -1,6 +1,6 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.vo.UserVO;
+import hu.neuron.java.project.core.entity.UserVO;
 
 
 public interface UserService {

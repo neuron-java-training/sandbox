@@ -1,7 +1,7 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.vo.RoleVO;
-import hu.neuron.java.project.core.vo.UserVO;
+import hu.neuron.java.project.core.entity.RoleVO;
+import hu.neuron.java.project.core.entity.UserVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
