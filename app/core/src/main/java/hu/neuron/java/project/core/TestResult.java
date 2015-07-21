@@ -2,6 +2,8 @@ package hu.neuron.java.project.core;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
 public class TestResult implements Comparable<TestResult>, Serializable{
 	
 	/**
