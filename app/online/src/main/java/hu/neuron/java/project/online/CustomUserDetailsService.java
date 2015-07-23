@@ -1,10 +1,8 @@
 package hu.neuron.java.project.online;
 
 import hu.neuron.java.project.core.UserService;
-
-
-import hu.neuron.java.project.core.entity.RoleVO;
-import hu.neuron.java.project.core.entity.UserVO;
+import hu.neuron.java.project.core.vo.RoleVO;
+import hu.neuron.java.project.core.vo.UserVO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
+	
 	@Autowired
 	private UserService userService;
 
@@ -31,7 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		UserVO user; 
 		try {
-			user = userService.findUserByName(username);
+			user = userService.findUserAndRolesByName(username);
 
 			List<GrantedAuthority> authorities = buildUserAuthority(user
 					.getRoles());

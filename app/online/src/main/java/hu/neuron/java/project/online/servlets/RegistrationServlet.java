@@ -2,7 +2,7 @@ package hu.neuron.java.project.online.servlets;
 
 
 import hu.neuron.java.project.core.UserService;
-import hu.neuron.java.project.core.entity.UserVO;
+import hu.neuron.java.project.core.vo.UserVO;
 
 import java.io.IOException;
 
@@ -30,18 +30,18 @@ public class RegistrationServlet extends HttpRequestHandlerServlet implements
 
 	private static final long serialVersionUID = 1L;
 
-//	@PreAuthorize("hasRole('USER')")
 	public void handleRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 
+			System.out.println(request.getContextPath());
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String password2 = request.getParameter("password2");
 
 			if (!password.equals(password2)) {
 				request.setAttribute("error", "Password not match");
-			} else if (service.findUserByName(username) != null) {
+			} else if (service.findUserAndRolesByName(username) != null) {
 				request.setAttribute("error", "Username exits");
 			} else {
 

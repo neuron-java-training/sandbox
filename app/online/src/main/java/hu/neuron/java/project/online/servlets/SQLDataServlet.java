@@ -32,8 +32,8 @@ public class SQLDataServlet extends HttpRequestHandlerServlet implements
 	
 	@Autowired
 	private  SQLProcessor SQLProcessor;
-	@Autowired
-	private  SQLTestRunner tester;
+
+	private  SQLTestRunner tester = new SQLTestRunner();
 	
 	private static List<WebVO> data;
 
