@@ -1,7 +1,10 @@
-package hu.neuron.java.project.core;
+package hu.neuron.java.project.core.vo;
+
+import hu.neuron.java.project.core.TestResult;
 
 public class TestResultVO {
 	
+	private Long id;
 	private String className;
 	private int n;
 	private long accessTime;
@@ -83,5 +86,13 @@ public class TestResultVO {
 		System.out.println("Duplicate elimination time: " + duplicateTime / TestResult.VIEWRATIO);
 		System.out.println();
 		
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

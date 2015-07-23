@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SQLWriter implements Writer {
+public class JPAWriter implements Writer<TestResult> {
 
 	private List<TestResult> results;
 
 	@Autowired
 	private TestResultDAO dao;
 
-	public SQLWriter() {
+	public JPAWriter() {
+	}
+
+	public JPAWriter(List<TestResult> results) {
+		this.results = results;
 	}
 
 	public void write() {

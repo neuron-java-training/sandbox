@@ -4,7 +4,6 @@ import hu.neuron.java.project.app.lists.GenericListTester;
 import hu.neuron.java.project.app.map.GenericMapTester;
 import hu.neuron.java.project.app.sets.GenericSetTester;
 import hu.neuron.java.project.common.interfaces.Writer;
-import hu.neuron.java.project.core.SQLWriter;
 import hu.neuron.java.project.core.TestResult;
 
 import java.util.ArrayList;
@@ -21,14 +20,19 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class SQLTestRunner {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class JPATestRunner {
 
 	public ArrayList<Test> tests;
 	public ArrayList<TestResult> results;
 	
-	private Writer writer;
+	@Autowired
+	private Writer<TestResult> writer;
 	
-	public SQLTestRunner(){}
+	public JPATestRunner(){}
 
 	public void runTests() {
 		tests = new ArrayList<>();
@@ -113,8 +117,7 @@ public class SQLTestRunner {
 			}
 		}
 		
-		writer = new SQLWriter();
-		((SQLWriter)writer).setResults(results);
+		writer.setResults(results);
 		writer.write();
 
 	}

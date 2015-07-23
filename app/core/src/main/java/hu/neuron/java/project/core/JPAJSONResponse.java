@@ -2,10 +2,10 @@ package hu.neuron.java.project.core;
 
 import java.util.List;
 
-public class SQLJSONResponse {
+public class JPAJSONResponse {
 	
 	List<WebVO> data;
-	public SQLJSONResponse(List<WebVO> data){
+	public JPAJSONResponse(List<WebVO> data){
 		this.data = data;
 	}
 }

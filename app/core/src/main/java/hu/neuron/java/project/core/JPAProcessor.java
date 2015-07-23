@@ -1,6 +1,7 @@
 package hu.neuron.java.project.core;
 
 import hu.neuron.java.project.core.db.TestResultDAO;
+import hu.neuron.java.project.core.vo.TestResultVO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SQLProcessor {
+public class JPAProcessor {
 
 	@Autowired
 	private TestResultDAO dao;
 
-	public SQLProcessor() {
+	public JPAProcessor() {
 	}
 
 	public List<WebVO> generateVOs() {
