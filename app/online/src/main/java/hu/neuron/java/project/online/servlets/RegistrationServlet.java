@@ -34,7 +34,6 @@ public class RegistrationServlet extends HttpRequestHandlerServlet implements
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 
-			System.out.println(request.getContextPath());
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String password2 = request.getParameter("password2");

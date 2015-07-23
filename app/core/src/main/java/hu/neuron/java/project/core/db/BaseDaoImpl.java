@@ -79,7 +79,6 @@ public abstract class BaseDaoImpl<E extends BaseEntity, V extends Serializable>
 
 
 	public E findEntity(Long id) throws Exception {
-		System.out.println("findEntity started, class: " +entityClass.getSimpleName());
 		return this.entityManager.find(entityClass, id);
 
 	}

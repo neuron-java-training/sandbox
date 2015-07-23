@@ -3,7 +3,7 @@ package hu.neuron.java.project.core.db;
 import java.util.List;
 
 import hu.neuron.java.project.core.TestResult;
-import hu.neuron.java.project.core.TestResultVO;
+import hu.neuron.java.project.core.vo.TestResultVO;
 
 public interface TestResultDAO {
 	

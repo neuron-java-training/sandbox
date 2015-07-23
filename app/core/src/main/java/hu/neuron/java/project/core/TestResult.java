@@ -1,22 +1,29 @@
 package hu.neuron.java.project.core;
 
+import hu.neuron.java.project.core.entity.BaseEntity;
+
 import java.io.Serializable;
 
-import org.springframework.stereotype.Component;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-public class TestResult implements Comparable<TestResult>, Serializable{
+@Entity
+@Table(name = "TestResult")
+@NamedQuery(name = "findAllTestResults", query = "select r from TestResult AS r")
+public class TestResult extends BaseEntity implements Comparable<TestResult>, Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public static final long VIEWRATIO = 100_000;
-	private long initTime;
-	private long fillTime;
-	private long sortTime;
-	private long accessTime;
-	private long deletionTime;
-	private long duplicateEliminationTime;
+	private Long initTime;
+	private Long fillTime;
+	private Long sortTime;
+	private Long accessTime;
+	private Long deletionTime;
+	private Long duplicateEliminationTime;
 	private String collectionName;
 	
 	public TestResult(){}
@@ -25,51 +32,51 @@ public class TestResult implements Comparable<TestResult>, Serializable{
 		collectionName = name;
 	}
 
-	public long getInitTime() {
+	public Long getInitTime() {
 		return initTime;
 	}
 
-	public void setInitTime(long initTime) {
+	public void setInitTime(Long initTime) {
 		this.initTime = initTime;
 	}
 
-	public long getFillTime() {
+	public Long getFillTime() {
 		return fillTime;
 	}
 
-	public void setFillTime(long fillTime) {
+	public void setFillTime(Long fillTime) {
 		this.fillTime = fillTime;
 	}
 
-	public long getSortTime() {
+	public Long getSortTime() {
 		return sortTime;
 	}
 
-	public void setSortTime(long sortTime) {
+	public void setSortTime(Long sortTime) {
 		this.sortTime = sortTime;
 	}
 
-	public long getAccessTime() {
+	public Long getAccessTime() {
 		return accessTime;
 	}
 
-	public void setAccessTime(long accessTime) {
+	public void setAccessTime(Long accessTime) {
 		this.accessTime = accessTime;
 	}
 
-	public long getDeletionTime() {
+	public Long getDeletionTime() {
 		return deletionTime;
 	}
 
-	public void setDeletionTime(long deletionTime) {
+	public void setDeletionTime(Long deletionTime) {
 		this.deletionTime = deletionTime;
 	}
 
-	public long getDuplicateEliminationTime() {
+	public Long getDuplicateEliminationTime() {
 		return duplicateEliminationTime;
 	}
 
-	public void setDuplicateEliminationTime(long duplicateEliminationTime) {
+	public void setDuplicateEliminationTime(Long duplicateEliminationTime) {
 		this.duplicateEliminationTime = duplicateEliminationTime;
 	}
 	
@@ -83,19 +90,6 @@ public class TestResult implements Comparable<TestResult>, Serializable{
 	
 	public void setCollectionName(String collectionName) {
 		this.collectionName = collectionName;
-	}
-
-	public void display() {
-		System.out.println("Collection: " + collectionName);
-		System.out.println("Creation time: " + initTime / VIEWRATIO );
-		System.out.println("Fill time: " + fillTime / VIEWRATIO);
-		System.out.println("Sort time: " + sortTime / VIEWRATIO);
-		System.out.println("Access time: " + accessTime / VIEWRATIO);
-		System.out.println("Deletion time: " + deletionTime / VIEWRATIO);
-		System.out.println("Duplicate elimination time: " + duplicateEliminationTime / VIEWRATIO);
-		System.out.println("Average Score: " + getAverageScore() / VIEWRATIO);
-		System.out.println();
-		
 	}
 
 	@Override

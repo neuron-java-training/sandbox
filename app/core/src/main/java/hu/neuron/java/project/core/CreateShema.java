@@ -1,9 +1,12 @@
 package hu.neuron.java.project.core;
 
 
+import hu.neuron.java.project.app.tester.JPATestRunner;
 import hu.neuron.java.project.core.db.RoleDAO;
+import hu.neuron.java.project.core.db.TestResultDAO;
 import hu.neuron.java.project.core.db.UserDAO;
 import hu.neuron.java.project.core.vo.RoleVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +36,8 @@ public class CreateShema {
 				rvo.setId(null);
 				rvo.setName("ROLE_ADMIN");
 				roleDAO.save(rvo);
-			}	
+			}
+			
 		} catch (Exception e) {
 			System.err.println("Nem sikerült a sémát létrehozni");
 		}

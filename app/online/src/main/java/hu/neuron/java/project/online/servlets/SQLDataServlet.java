@@ -1,8 +1,8 @@
 package hu.neuron.java.project.online.servlets;
 
-import hu.neuron.java.project.app.tester.SQLTestRunner;
-import hu.neuron.java.project.core.SQLJSONResponse;
-import hu.neuron.java.project.core.SQLProcessor;
+import hu.neuron.java.project.app.tester.JPATestRunner;
+import hu.neuron.java.project.core.JPAJSONResponse;
+import hu.neuron.java.project.core.JPAProcessor;
 import hu.neuron.java.project.core.WebVO;
 
 import java.io.IOException;
@@ -31,9 +31,10 @@ public class SQLDataServlet extends HttpRequestHandlerServlet implements
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
-	private  SQLProcessor SQLProcessor;
+	private  JPAProcessor SQLProcessor;
 
-	private  SQLTestRunner tester = new SQLTestRunner();
+	@Autowired
+	private  JPATestRunner tester;
 	
 	private static List<WebVO> data;
 
@@ -64,13 +65,13 @@ public class SQLDataServlet extends HttpRequestHandlerServlet implements
 		else {
 			String s = request.getParameter("load");
 			if(s != null && s.equals("Load results")){
-				
+
 				data = SQLProcessor.generateVOs();
 				forward(request, response);
 			}
 			else{
 				Gson gson = new Gson();
-				SQLJSONResponse rp = new SQLJSONResponse(data);
+				JPAJSONResponse rp = new JPAJSONResponse(data);
 				gson.toJson(rp, response.getWriter());
 			}
 		}

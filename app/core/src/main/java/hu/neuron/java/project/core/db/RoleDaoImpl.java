@@ -96,14 +96,4 @@ public class RoleDaoImpl extends BaseDaoImpl<Role, RoleVO> implements RoleDAO {
 
 		return ret;
 	}
-
-//	@Override
-//	public Long save(RoleVO rvo) throws Exception {
-//		Role entity = new Role();
-//		entity.setId(rvo.getId());
-//		entity.setName(rvo.getName());
-//		entityManager.persist(entity);
-//		return entity.getId();
-//	}
-
 }

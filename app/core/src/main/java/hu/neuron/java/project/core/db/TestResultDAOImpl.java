@@ -1,74 +1,61 @@
 package hu.neuron.java.project.core.db;
 
 import hu.neuron.java.project.core.TestResult;
-import hu.neuron.java.project.core.TestResultVO;
+import hu.neuron.java.project.core.vo.TestResultVO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional(propagation=Propagation.REQUIRED)
 public class TestResultDAOImpl implements TestResultDAO {
 
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	@PersistenceContext()
+	protected EntityManager entityManager;
 
 	@Override
-	public Long save(final TestResult tr) {
-
-		final String INSERT_SQL = "insert into results values(?,?,?,?,?,?,?,?)";
-
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTemplate.update(new PreparedStatementCreator() {
-			public PreparedStatement createPreparedStatement(
-					Connection connection) throws SQLException {
-				PreparedStatement ps = connection.prepareStatement(INSERT_SQL,
-						Statement.RETURN_GENERATED_KEYS);
-				ps.setLong(1, 0);
-				ps.setString(2, tr.getCollectionName());
-				ps.setLong(3, tr.getInitTime());
-				ps.setLong(4, tr.getFillTime());
-				ps.setLong(5, tr.getSortTime());
-				ps.setLong(6, tr.getAccessTime());
-				ps.setLong(7, tr.getDeletionTime());
-				ps.setLong(8, tr.getDuplicateEliminationTime());
-				return ps;
-			}
-		}, keyHolder);
-		
-		return keyHolder.getKey().longValue();
+	public Long save(TestResult tr) {
+		System.out.println("saving testResult for: "+tr.getCollectionName());
+		entityManager.persist(tr);
+		System.out.println("saved id: "+tr.getId());
+		return tr.getId();
 	}
 
 	@Override
 	public List<TestResultVO> readAll() {
-		return this.jdbcTemplate.query("select * from results",
-				new TestResultVOMapper());
+		TypedQuery<TestResult> createNamedQuery = entityManager.createNamedQuery(
+				"findAllTestResults", TestResult.class);
+		List<TestResult> resultList = createNamedQuery.getResultList();
+		ArrayList<TestResultVO> rl = new ArrayList<>(resultList.size());
+		for(TestResult tr: resultList){
+			rl.add(toVo(tr));
+		}
+		return rl;
 	}
 	
-	public static final class TestResultVOMapper implements RowMapper<TestResultVO> {
-
-		public TestResultVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new TestResultVO(rs.getString("name"),rs.getLong("init"),rs.getLong("fill"),
-					rs.getLong("sort"),rs.getLong("access"),rs.getLong("delete"),
-					rs.getLong("unduplicate"));
+	private TestResultVO toVo(TestResult entity) {
+		TestResultVO ret = new TestResultVO();
+		if (entity == null) {
+			return null;
 		}
+		ret.setClassName(entity.getCollectionName());
+		ret.setId(entity.getId());
+		ret.setAccessTime(entity.getAccessTime());
+		ret.setDeletionTime(entity.getDeletionTime());
+		ret.setDuplicateTime(entity.getDuplicateEliminationTime());
+		ret.setFillTime(entity.getFillTime());
+		ret.setInitTime(entity.getInitTime());
+		ret.setSortTime(entity.getSortTime());
+
+		return ret;
 	}
 
 }
