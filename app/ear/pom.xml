@@ -8,53 +8,54 @@
 		<artifactId>ejb-example</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>core</artifactId>
-	<packaging>ejb</packaging>
-	<name>core</name>
+	<artifactId>ear</artifactId>
+	<packaging>ear</packaging>
+	<name>ear</name>
 	<url>http://maven.apache.org</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
 	<dependencies>
-		<!-- TEST -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>hu.neuron.java</groupId>
-			<artifactId>core-client-api</artifactId>
+			<artifactId>core</artifactId>
+			<type>ejb</type>
 			<version>${version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<scope>provided</scope>
+			<groupId>hu.neuron.java</groupId>
+			<artifactId>service</artifactId>
+			<type>ejb</type>
+			<version>${version}</version>
 		</dependency>
-
+		
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
+			<groupId>hu.neuron.java</groupId>
+			<artifactId>web</artifactId>
+			<type>war</type>
+			<version>${version}</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>2.3</version>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.6</version>
 				<configuration>
-					<filterDeploymentDescriptor>true</filterDeploymentDescriptor>
-					<ejbVersion>3.1</ejbVersion>
+					<version>6</version>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<ejbModule>
+							<groupId>hu.neuron.java</groupId>
+							<artifactId>core</artifactId>
+						</ejbModule>
+					</modules>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
