@@ -1,4 +1,4 @@
-package hu.neuron.java.project.core.db;
+package hu.neuron.java.project.core.dao;
 
 import hu.neuron.java.project.core.entity.BaseEntity;
 

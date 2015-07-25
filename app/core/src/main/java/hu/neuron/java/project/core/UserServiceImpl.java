@@ -1,7 +1,7 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.db.RoleDAO;
-import hu.neuron.java.project.core.db.UserDAO;
+import hu.neuron.java.project.core.dao.RoleDAO;
+import hu.neuron.java.project.core.dao.UserDAO;
 import hu.neuron.java.project.core.vo.RoleVO;
 import hu.neuron.java.project.core.vo.UserVO;
 

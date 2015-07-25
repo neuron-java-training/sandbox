@@ -1,6 +1,6 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.db.TestResultDAO;
+import hu.neuron.java.project.core.dao.TestResultDAO;
 import hu.neuron.java.project.common.interfaces.Writer;
 
 import java.util.List;

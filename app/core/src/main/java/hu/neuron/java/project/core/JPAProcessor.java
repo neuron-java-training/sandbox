@@ -1,6 +1,6 @@
 package hu.neuron.java.project.core;
 
-import hu.neuron.java.project.core.db.TestResultDAO;
+import hu.neuron.java.project.core.dao.TestResultDAO;
 import hu.neuron.java.project.core.vo.TestResultVO;
 
 import java.util.ArrayList;

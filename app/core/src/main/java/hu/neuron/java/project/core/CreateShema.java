@@ -2,9 +2,9 @@ package hu.neuron.java.project.core;
 
 
 import hu.neuron.java.project.app.tester.JPATestRunner;
-import hu.neuron.java.project.core.db.RoleDAO;
-import hu.neuron.java.project.core.db.TestResultDAO;
-import hu.neuron.java.project.core.db.UserDAO;
+import hu.neuron.java.project.core.dao.RoleDAO;
+import hu.neuron.java.project.core.dao.TestResultDAO;
+import hu.neuron.java.project.core.dao.UserDAO;
 import hu.neuron.java.project.core.vo.RoleVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
