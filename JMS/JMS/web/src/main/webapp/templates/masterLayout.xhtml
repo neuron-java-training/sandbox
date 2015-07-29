@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view>
+
+	<h:head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<title><ui:insert name="pageTitle"></ui:insert></title>
+		<ui:insert name="head-extra" />
+	</h:head>
+
+	<h:body>
+		<p:growl id="growl" showDetail="true" autoUpdate="true" />
+		<ui:include src="/includes/loginContent.xhtml"></ui:include>
+		<p:menubar>
+
+			<p:menuitem value="Secured" url="/secured/secured.xhtml"
+				icon="ui-icon-locked" />
+
+			<p:menuitem value="Demo" url="/secured/demo.xhtml" />
+
+			<p:submenu label="Admin" icon="ui-icon-gear">
+				<p:menuitem value="Users" url="/secured/users.xhtml"
+					icon="fa fa-user" />
+				<p:menuitem value="Role" url="/secured/roles.xhtml"
+					icon="fa fa-user" />
+			</p:submenu>
+
+			<f:facet name="options">
+
+				<c:choose>
+					<c:when
+						test="#{!request.requestURL.toString().contains('login.xhtml') and request.userPrincipal.name == null }">
+						<p:commandButton value="Login" type="button"
+							onclick="PF('loginDialog').show();" icon="ui-icon-unlocked" />
+					</c:when>
+					<c:otherwise>
+						<p:button href="/logout" value="Logout" icon="ui-icon-extlink" />
+					</c:otherwise>
+				</c:choose>
+			</f:facet>
+
+		</p:menubar>
+		
+
+		<div id="contentDiv">
+			<div class="ui-wrap-content" style="height: 100%;">
+				<div id="content">
+					<div id="contentInside">
+						<ui:insert name="content" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</h:body>
+
+</f:view>
+</html>

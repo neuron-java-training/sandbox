@@ -1,0 +1,175 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml">
+
+	<ui:define name="pageTitle">#{out.admin_title}</ui:define>
+	<ui:define name="header"> -> #{out.admin_title}</ui:define>
+
+
+	<ui:define name="content">
+
+		<p:panel id="Poll" header="Poll" footer="Poll"
+			style="margin-bottom:20px">
+			<h:form>
+
+				<p:poll interval="1" listener="#{jsfTimerBean.getChecks}"
+					widgetVar="timerpoll" autoStart="false" update="txt_count" />
+
+				<p:commandButton value="Start" update="form" type="button"
+					onclick="PF('timerpoll').start();PF('startPollButton').disable();PF('cancelPollButton').enable()"
+					widgetVar="startPollButton" />
+
+				<p:commandButton value="Stop" update="form" type="button"
+					disabled="true"
+					onclick="PF('timerpoll').stop();PF('startPollButton').enable();PF('cancelPollButton').disable();"
+					widgetVar="cancelPollButton" />
+
+				<h:outputText id="txt_count" value="#{jsfTimerBean.value}" />
+			</h:form>
+		</p:panel>
+
+		<p:panel id="AsyncProcess" header="AsyncProcess" footer="AsyncProcess"
+			style="margin-bottom:20px">
+			<h:form id="form">
+
+				<p:inputText required="true" value="#{asyncProcess.number}"
+					requiredMessage="Kötelező megadni!" />
+				<p:commandButton value="Start" update="form"
+					actionListener="#{asyncProcess.start}"
+					onsuccess="PF('startButton').disable();"
+					disabled="#{asyncProcess.inProgress}"
+					oncomplete="if(PF('pbAjax')){PF('pbAjax').start();}"
+					widgetVar="startButton" />
+
+				<br />
+
+				<p:progressBar widgetVar="pbAjax" ajax="true"
+					rendered="#{asyncProcess.inProgress}"
+					value="#{asyncProcess.progress}" labelTemplate="{value}%"
+					styleClass="animated" global="false">
+					<p:ajax event="complete" oncomplete="PF('startButton').enable();" />
+				</p:progressBar>
+
+			</h:form>
+		</p:panel>
+
+
+		<p:panel id="AsyncQueue" header="Async Queue" footer="Async Queue"
+			style="margin-bottom:20px">
+
+
+			<h:form id="AsyncQueueform">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+						<div class="ui-grid-col-3">
+							<p:selectOneButton value="#{asyncQueue.type}" required="true"
+								requiredMessage="Kötelező megadni!">
+								<f:selectItem itemLabel="Type A" itemValue="A" />
+								<f:selectItem itemLabel="Type B" itemValue="B" />
+							</p:selectOneButton>
+						</div>
+						<div class="ui-grid-col-3">
+							<p:inputText required="true" value="#{asyncQueue.message}"
+								requiredMessage="Kötelező megadni!" />
+						</div>
+						<div class="ui-grid-col-2">
+							<p:commandButton value="Send" update="AsyncQueueform"
+								actionListener="#{asyncQueue.sendMessage}" />
+						</div>
+						<div class="ui-grid-col-4">
+							<p:commandButton value="Refress" update="AsyncQueueform"
+								immediate="true" actionListener="#{asyncQueue.checkMessages}" />
+						</div>
+						<div class="ui-grid-col-6"></div>
+					</div>
+				</div>
+
+
+				<p:panel id="messages" header="Messages" footer="Messages"
+					style="margin:20px">
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row">
+							<div class="ui-grid-col-5">
+
+								<p:dataList value="#{asyncQueue.aTypeMessages}" var="massage"
+									type="unordered" itemType="none" paginator="true" rows="10"
+									styleClass="paginated">
+									<f:facet name="header">
+										<h:outputText value="A type" />
+									</f:facet>
+
+									<h:outputText value="#{massage}" style="display:inline-block" />
+								</p:dataList>
+							</div>
+							<div class="ui-grid-col-1"></div>
+							<div class="ui-grid-col-5">
+								<p:dataList value="#{asyncQueue.bTypeMessages}" var="massage"
+									type="unordered" itemType="none" paginator="true" rows="10"
+									styleClass="paginated">
+									<f:facet name="header">
+										<h:outputText value="B type" />
+									</f:facet>
+
+									<h:outputText value="#{massage}" style="display:inline-block" />
+								</p:dataList>
+							</div>
+						</div>
+					</div>
+				</p:panel>
+			</h:form>
+		</p:panel>
+
+		<p:panel id="SyncQueue" header="Sync Queue" footer="Sync Queue"
+			style="margin-bottom:20px">
+
+
+			<h:form id="SyncQueueform">
+				<div class="ui-grid ui-grid-responsive">
+					<div class="ui-grid-row">
+
+						<div class="ui-grid-col-3">
+							<p:inputText required="true" value="#{syncQueue.message}"
+								requiredMessage="Kötelező megadni!" />
+						</div>
+						<div class="ui-grid-col-2">
+							<p:commandButton value="Send" update="SyncQueueform"
+								actionListener="#{syncQueue.sendMessage}" />
+						</div>
+						<div class="ui-grid-col-4">
+							<p:commandButton value="Refress" update="SyncQueueform"
+								immediate="true" actionListener="#{syncQueue.checkMessages}" />
+						</div>
+						<div class="ui-grid-col-6"></div>
+					</div>
+				</div>
+
+
+				<p:panel id="messages" header="Messages" footer="Messages"
+					style="margin:20px">
+					<div class="ui-grid ui-grid-responsive">
+
+						<div class="ui-grid-col-5">
+							<p:dataList value="#{syncQueue.messageVOs}" var="massage"
+								type="unordered" itemType="none" paginator="true" rows="10"
+								styleClass="paginated">
+								<f:facet name="header">
+									<h:outputText value="MessageVO" />
+								</f:facet>
+
+								
+								<h:outputText value="#{massage.date.time}">
+									<f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+								</h:outputText>
+								<h:outputText value=" - #{massage.message} " />
+							</p:dataList>
+						</div>
+					</div>
+				</p:panel>
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>

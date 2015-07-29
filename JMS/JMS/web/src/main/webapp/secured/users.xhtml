@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/masterLayout.xhtml">
+
+
+    <ui:define name="pageTitle">#{out.admin_title}</ui:define>
+    <ui:define name="header"> -> #{out.admin_title}</ui:define>
+
+    <ui:define name="head-extra">
+        <!-- custom css -->
+    </ui:define>
+
+    <ui:define name="content">
+
+        <p:dialog id="updateUserDialog" width="50%"
+                  header="#{out.userform_user}" widgetVar="dlg_edit"
+                  modal="true" resizable="false">
+            <h:form id="dialogForm">
+                <div class="ui-grid ui-grid-responsive ui-grid-row ui-grid-col-2">
+                    <h:panelGrid columns="2" style="width:100%" cellpadding="5">
+                        <h:outputText value="#{out.userform_user}:"
+                                      style="font-weight:bold" />
+                        <h:outputText id="name"
+                                      value="#{adminController.selectedUser.userName}" />
+
+
+
+
+
+                        <p:outputLabel value="#{out.userform_addrole}" for="addRole" />
+
+                        <p:autoComplete id="addRole" value="#{adminController.role}"
+                                        completeMethod="#{adminController.completeText}" />
+
+                        <p:commandButton update=":dialogForm" ajax="true"
+                                         validateClient="true" 
+                                         action="#{adminController.addRoleToUser()}"
+                                         value="#{out.userform_addrole}">
+                        </p:commandButton>
+
+                    </h:panelGrid>
+                    <p:dataTable id="addedRoles" var="role" value="#{adminController.userRoles}"
+                                 selectionMode="single"
+                                 rowKey="#{role.id}" selection="#{adminController.selectedRole}"
+                                 emptyMessage="#{out.empty_message}"
+                                 >
+                        <p:ajax event="rowSelect" listener="#{adminController.onRoleRowSelect}" 
+                                update=":dialogForm" /> 
+                        <p:ajax event="rowUnselect" 
+                                listener="#{adminController.onRoleRowUnselect}" 
+                                update=":dialogForm" />
+                        <p:column headerText="Role">
+                            <h:outputText value="#{role.name}" />
+                        </p:column> 
+                    </p:dataTable>
+
+                    <p:commandButton update=":adminForm" ajax="false"
+                                     validateClient="true" action="#{adminController.updateUser()}"
+                                     icon="ui-icon-eject" title="#{orders_create_dialog_create}"
+                                     value="#{out.userform_update}">
+                    </p:commandButton>
+                    <p:commandButton update=":adminForm,:dialogForm" ajax="true"
+                                     validateClient="false" immediate="true"
+                                     action="#{adminController.removeRole()}" icon="ui-icon-minus"
+                                     value="#{out.userform_remove}">
+                    </p:commandButton>
+                    <p:commandButton update=":adminForm" ajax="false"
+                                     validateClient="false" immediate="true"
+                                     action="#{adminController.unselect()}" icon="ui-icon-close"
+                                     value="#{out.userform_cancel}">
+                    </p:commandButton>
+
+
+                </div>
+            </h:form>
+        </p:dialog>
+        <h:form id="adminForm">
+            <p:growl id="msgs" showDetail="true" />
+            <p:dataTable id="userTable" var="currentUser"
+                         value="#{adminBean.userModel}" selectionMode="single"
+                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="5,10,15" lazy="true" paginator="true" rows="10"
+                         selection="#{adminController.selectedUser}" 
+                         emptyMessage="#{out.empty_message}">
+
+                <p:ajax event="rowSelect" listener="#{adminController.onRowSelect}" 
+                        update=":adminForm:msgs,:adminCommandsForm,:updateUserDialog" /> 
+                        
+                <p:ajax event="rowUnselect" 
+                        listener="#{adminController.onRowUnselect}" 
+                        update=":adminForm:msgs,:adminCommandsForm,:updateUserDialog" /> 
+
+                <p:column headerText="#{out.userform_username}"
+                          sortBy="#{currentUser.userName}" filterBy="#{currentUser.userName}">
+                    <h:outputText value="#{currentUser.userName}" />
+                </p:column>
+               
+
+            </p:dataTable>
+        </h:form>
+        <h:form id="adminCommandsForm">
+            <h:panelGrid columns="4" cellpadding="5">
+                <p:commandButton icon="ui-icon-arrowrefresh-1-n"
+                                 value="#{out.orders_buttons_details}"
+                                 title="#{out.orders_buttons_details}" type="button"
+                                 onclick="PF('dlg_edit').show()"
+                                 disabled="#{adminController.selectedUser == null}">
+                </p:commandButton>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

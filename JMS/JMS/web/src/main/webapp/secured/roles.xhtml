@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml">
+
+	<ui:define name="pageTitle">#{out.admin_title}</ui:define>
+	<ui:define name="header"> -> #{out.admin_title}</ui:define>
+
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:dataTable var="role" value="#{roleController.lazyRoleModel}"
+				paginator="true" rows="10"
+				paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+				rowsPerPageTemplate="5,10,15" selectionMode="single"
+				selection="#{roleController.selectedRole}" id="roleTable"
+				lazy="true">
+
+				<p:ajax event="rowSelect" listener="#{roleController.onRowSelect}"
+					update="form:removeButton,form:updateButton,growl,updateRoleDialog" />
+
+				<p:column headerText="Name" sortBy="#{role.name}"
+					filterBy="#{role.name}">
+					<h:outputText value="#{role.name}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<div class="ui-grid ui-grid-responsive">
+				<div class="ui-grid-row">
+					<div class="ui-grid-col-3"></div>
+					<div class="ui-grid-col-3">
+						<p:commandButton value="Save" type="button"
+							onclick="PF('createRole').show();" />
+					</div>
+					<div class="ui-grid-col-3">
+						<p:commandButton value="Update" type="button" id="updateButton"
+							disabled="#{roleController.selectedRole == null}"
+							onclick="PF('updateRole').show();" />
+					</div>
+					<div class="ui-grid-col-3">
+						<p:commandButton value="Delete" id="removeButton"
+							update="form:roleTable,form:removeButton,form:updateButton"
+							disabled="#{roleController.selectedRole == null}"
+							actionListener="#{roleController.removeRole}" />
+					</div>
+				</div>
+			</div>
+
+		</h:form>
+		<p:dialog header="Effects" widgetVar="createRole" showEffect="explode"
+			hideEffect="bounce" mheight="100" modal="true">
+			<h:form>
+				<h:outputLabel for="roleNmae" value="Name:" style="font-weight:bold" />
+				<p:inputText id="roleNmae" required="true"
+					value="#{roleController.newRoleName}" />
+
+				<p:commandButton value="Save" id="save"
+					actionListener="#{roleController.saveNewRole}"
+					update="growl, form:roleTable" icon="ui-icon-disk"
+					oncomplete="PF('createRole').hide();" />
+			</h:form>
+		</p:dialog>
+
+		<p:dialog header="Effects" widgetVar="updateRole" showEffect="explode"
+			id="updateRoleDialog" hideEffect="bounce" mheight="100" modal="true">
+			<h:form>
+				<h:outputLabel for="roleNmae" value="Name:" style="font-weight:bold" />
+				<p:inputText id="roleNmae" required="true"
+					value="#{roleController.updateRoleName}" />
+
+				<p:commandButton value="Update" id="update"
+					actionListener="#{roleController.updateRole}"
+					update="growl, form:roleTable,form:updateButton,form:removeButton"
+					icon="ui-icon-disk" oncomplete="PF('updateRole').hide();" />
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>

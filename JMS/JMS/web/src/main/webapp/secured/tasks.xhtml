@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/templates/masterLayout.xhtml">
+
+	<ui:define name="pageTitle">#{out.admin_title}</ui:define>
+	<ui:define name="header"> -> #{out.admin_title}</ui:define>
+
+
+	<ui:define name="content">
+		<h:form id="form">
+			<p:dataTable var="message" value="#{syncTaskQueue.messageVOs}">
+				<p:column headerText="Number">
+					<h:outputText value="#{message.message}" />
+				</p:column>
+
+				<p:column headerText="Time">
+					<h:outputText value="#{message.date.time}">
+						<f:convertDateTime pattern="yyyy.MM.dd HH:mm" />
+					</h:outputText>
+				</p:column>
+			</p:dataTable>
+
+			<p:commandButton value="Show" id="show" update="form"
+				actionListener="#{syncTaskQueue.showMessage}"
+				styleClass="ui-priority-primary" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
